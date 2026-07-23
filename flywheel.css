@@ -47,9 +47,9 @@
     --fw-panel: #181c19; --fw-code-bg: #1d221e;
     --fw-ok: #6fbf82; --fw-bad: #e07a8a;
     --fw-tok-key: #7cc47f; --fw-tok-str: #d99a8e; --fw-tok-num: #7aaede;
-    --fw-tok-bool: #cfa14f; --fw-tok-null: #777f79;
+    --fw-tok-bool: #cfa14f; --fw-tok-null: #949e96;
     --fw-term-bg: #101312; --fw-term-line: #242a26;
-    --fw-term-out: #9aa49d; --fw-term-cmd: #e6e9e6; --fw-term-cmt: #6e7a72;
+    --fw-term-out: #9aa49d; --fw-term-cmd: #e6e9e6; --fw-term-cmt: #8a948c;
   }
 }
 :root[data-theme="light"] {
@@ -58,9 +58,9 @@
   --fw-panel: #ffffff; --fw-code-bg: #f2f5f2;
   --fw-ok: #1a7a37; --fw-bad: #b00020;
   --fw-tok-key: #2f6f4f; --fw-tok-str: #a23c2c; --fw-tok-num: #1c66b3;
-  --fw-tok-bool: #8a5a00; --fw-tok-null: #999999;
+  --fw-tok-bool: #8a5a00; --fw-tok-null: #66706a;
   --fw-term-bg: #eef2ee; --fw-term-line: #d8ded9;
-  --fw-term-out: #66706a; --fw-term-cmd: #1c201d; --fw-term-cmt: #8a948c;
+  --fw-term-out: #66706a; --fw-term-cmd: #1c201d; --fw-term-cmt: #66706a;
 }
 :root[data-theme="dark"] {
   --fw-bg: #121513; --fw-ink: #e4e8e4; --fw-mut: #9aa49d;
@@ -68,9 +68,9 @@
   --fw-panel: #181c19; --fw-code-bg: #1d221e;
   --fw-ok: #6fbf82; --fw-bad: #e07a8a;
   --fw-tok-key: #7cc47f; --fw-tok-str: #d99a8e; --fw-tok-num: #7aaede;
-  --fw-tok-bool: #cfa14f; --fw-tok-null: #777f79;
+  --fw-tok-bool: #cfa14f; --fw-tok-null: #949e96;
   --fw-term-bg: #101312; --fw-term-line: #242a26;
-  --fw-term-out: #9aa49d; --fw-term-cmd: #e6e9e6; --fw-term-cmt: #6e7a72;
+  --fw-term-out: #9aa49d; --fw-term-cmd: #e6e9e6; --fw-term-cmt: #8a948c;
 }
 
 /* ---------- base / markdown elements (no classes needed) ---------- */
@@ -135,7 +135,7 @@ td { font-variant-numeric: tabular-nums; }
 
 /* top navigation: <nav><a>…</a> <a>…</a></nav> */
 nav { margin-bottom: 1em; }
-nav a { margin-right: 1em; border-bottom: none; }
+nav a { display: inline-block; padding: 5px 0; margin-right: 1em; border-bottom: none; }
 nav a:hover { border-bottom: 1px solid var(--fw-accent); }
 
 /* uppercase section label, use above an h1/h2 */
