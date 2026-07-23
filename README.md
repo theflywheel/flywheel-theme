@@ -71,9 +71,15 @@ sequenceDiagram
 </pre>
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'strict' });
+  mermaid.initialize({
+    startOnLoad: true, theme: 'neutral', securityLevel: 'strict',
+    themeVariables: { fontFamily: 'ui-monospace, SF Mono, Menlo, Consolas, monospace', fontSize: '13px' }
+  });
 </script>
 ```
+
+The `themeVariables` matter: mermaid's default is 16px in its own font, which looks
+inflated next to the 13px mono page — pass the theme's stack and size.
 
 ## Code blocks
 

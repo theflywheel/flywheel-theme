@@ -68,11 +68,22 @@ dedi.proto.theflywheel.in/log        # origin
 <pre class="mermaid">
 sequenceDiagram
     autonumber
+    actor U as Search box
     participant BAP as ONIX · BAP
-    participant D as dedid
-    BAP->>D: GET /lookup/{subscriber}/{key_id}
-    D-->>BAP: signing key + inclusion proof
-    BAP->>BAP: verify signature ✓
+    participant D as DeDi registry
+    participant BPP as ONIX · BPP
+    participant S as scheme-bpp
+    U->>BAP: discover { intent: query }
+    BAP->>BAP: sign (BAP key)
+    BAP->>BPP: POST /bpp/receiver/discover
+    BPP->>D: lookup BAP key
+    D-->>BPP: signing key + inclusion proof
+    BPP->>BPP: verify signature ✓
+    BPP->>S: /api/webhook/discover
+    S-->>BPP: on_discover { catalogs }
+    BPP->>BAP: on_discover (signed)
+    BAP->>D: lookup BPP key → verify ✓
+    BAP-->>U: matching schemes
 </pre>
 
 <table>
@@ -132,7 +143,10 @@ sequenceDiagram
 
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'strict' });
+  mermaid.initialize({
+    startOnLoad: true, theme: 'neutral', securityLevel: 'strict',
+    themeVariables: { fontFamily: 'ui-monospace, SF Mono, Menlo, Consolas, monospace', fontSize: '13px' }
+  });
 </script>
 <script src="hljson.js"></script>
 <script src="autogrow.js"></script>
