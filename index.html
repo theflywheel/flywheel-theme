@@ -78,11 +78,11 @@ sequenceDiagram
     BAP->>BPP: POST /bpp/receiver/discover
     BPP->>D: lookup BAP key
     D-->>BPP: signing key + inclusion proof
-    BPP->>BPP: verify signature ✓
+    BPP->>BPP: verify signature
     BPP->>S: /api/webhook/discover
     S-->>BPP: on_discover { catalogs }
     BPP->>BAP: on_discover (signed)
-    BAP->>D: lookup BPP key → verify ✓
+    BAP->>D: lookup BPP key → verify
     BAP-->>U: matching schemes
 </pre>
 
