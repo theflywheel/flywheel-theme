@@ -3,24 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>flywheel-theme · living spec</title>
+<title>flywheel-theme</title>
 <link rel="stylesheet" href="flywheel.css">
 </head>
 <body class="wide">
 
-<nav><a href="#type">Type</a> <a href="#markdown">Markdown</a> <a href="#components">Components</a> <a href="#controls">Controls</a></nav>
+<nav><a href="#article">Article</a> <a href="#markdown">Markdown</a> <a href="#components">Components</a> <a href="#controls">Controls</a>
+<a href="https://github.com/theflywheel/flywheel-theme">GitHub</a></nav>
 
 <p class="eyebrow">flywheel-theme</p>
-<h1>The mono/green language, as one stylesheet</h1>
-<p class="thesis">Extracted from the DeDi Explorer, Docs, and the schemes demo. Plain markdown needs
-no classes; everything below the Markdown section renders from bare elements.</p>
+<h1>Everything on this page is the theme</h1>
+<p class="sub">One stylesheet · <a href="https://github.com/theflywheel/flywheel-theme#readme">README</a> for usage and exact values</p>
 
-<h2 id="type">Type</h2>
-<p class="mut">One monospace stack for everything; a quiet scale where hierarchy comes from
-spacing and eyebrows, not size jumps. Judged by reading, not by numbers &mdash; exact values are in the
-<a href="https://github.com/theflywheel/flywheel-theme#typography">README</a>.</p>
+<h2 id="article">A post, as it would render</h2>
 <div class="card">
-  <p class="eyebrow">field notes &middot; registries</p>
+  <p class="eyebrow">field notes · registries</p>
   <h1 style="margin:.2em 0">Why the registry is the interesting part</h1>
   <p class="thesis">Every network has a phone book. The question is who gets to edit it,
   and whether anyone can prove they cheated.</p>
@@ -31,60 +28,72 @@ spacing and eyebrows, not size jumps. Judged by reading, not by numbers &mdash; 
   <h3>What transparency actually buys</h3>
   <p>An append-only log doesn&rsquo;t stop the operator from lying. It makes the lie
   <strong>provable</strong> &mdash; which, for institutions, is the property that matters.</p>
-  <p class="sub">Published 2026-07-23 &middot; 6 min read &middot; part of the DeDi notes</p>
+  <p class="sub">Published 2026-07-23 · 6 min read · part of the DeDi notes</p>
 </div>
 
-<h2 id="markdown">Markdown elements (zero classes)</h2>
+<h2 id="markdown">Markdown</h2>
 
-<p>A paragraph with a <a href="#">link</a>, some <strong>bold</strong>, and <code>inline code</code>.
-Links carry a hairline underline that turns accent on hover.</p>
+<p>A paragraph with a <a href="#">link</a>, some <strong>bold</strong>, an <em>emphasis</em>,
+and <code>inline code</code>.</p>
 
 <ul>
-  <li>list markers are accent green</li>
-  <li>spacing is compact: <code>0.3em</code> between items</li>
+  <li>standalone: one binary, one Postgres</li>
+  <li>witnessed: a second operator checks your history</li>
+  <li>anchored: roots pinned to an external ledger</li>
 </ul>
 <ol>
-  <li>ordered works the same</li>
-  <li>numbers inherit the marker color</li>
+  <li>fetch the signed checkpoint</li>
+  <li>demand a consistency proof</li>
+  <li>record the verdict in your own log</li>
 </ol>
 
-<blockquote>Blockquote: accent rail, muted ink. Good for pull-quotes and asides in posts.</blockquote>
+<blockquote>Governance that cannot be audited is not governance.</blockquote>
 
-<pre><code>$ curl -s "https://dedi.proto.theflywheel.in/dedi/log/checkpoint"
-dedi.proto.theflywheel.in/log
-17
-/L8CZJh/MYGMFWDP12ej...</code></pre>
+<pre data-lang="sh"><code><span class="hljs-meta">$</span> curl -s https://dedi.proto.theflywheel.in/dedi/log/checkpoint
+dedi.proto.theflywheel.in/log        <span class="hljs-comment"># origin</span>
+17                                   <span class="hljs-comment"># tree size</span>
+/L8CZJh/MYGMFWDP12ejc4Y6Vpr…         <span class="hljs-comment"># root hash</span>
+— dedi.proto.theflywheel.in Az3grl…  <span class="hljs-comment"># Ed25519 signature</span></code></pre>
+
+<pre data-lang="go"><code><span class="hljs-comment">// Anchor publishes the checkpoint and returns where it landed.</span>
+<span class="hljs-keyword">func</span> (c *CORD) <span class="hljs-title">Anchor</span>(ctx context.Context, checkpoint []<span class="hljs-type">byte</span>) (Ref, <span class="hljs-type">error</span>) {
+    <span class="hljs-keyword">if</span> err := c.connect(); err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-keyword">return</span> Ref{}, err
+    }
+    call, err := types.NewCall(meta, <span class="hljs-string">"System.remark"</span>, checkpoint)
+    <span class="hljs-comment">// receipts live outside the log: anchoring must never grow the tree</span>
+}</code></pre>
 
 <table>
-  <tr><th>Endpoint</th><th>Returns</th><th>Calls</th></tr>
-  <tr><td><code>/dedi/lookup/…</code></td><td>latest record version</td><td>41,204</td></tr>
-  <tr><td><code>/dedi/log/checkpoint</code></td><td>signed tree head</td><td>2,881</td></tr>
+  <tr><th>Endpoint</th><th>Returns</th><th>Consumed by</th></tr>
+  <tr><td><code>/dedi/lookup/…</code></td><td>latest record version</td><td>ONIX adapters</td></tr>
+  <tr><td><code>/dedi/log/checkpoint</code></td><td>signed tree head</td><td>witnesses, browsers</td></tr>
+  <tr><td><code>/dedi/log/proof/consistency</code></td><td>append-only proof</td><td>witnesses</td></tr>
 </table>
 
 <hr>
 
 <h2 id="components">Components</h2>
 
-<p><span class="badge">badge · accent chip</span> <span class="tag">tag</span> <span class="tag">neutral</span>
-<span class="tag">taxonomy</span> · status: <span class="ok">✓ verified</span> / <span class="no">✗ rejected</span></p>
+<p><span class="badge">Beckn 2.0.0</span> <span class="tag">pension</span> <span class="tag">widow</span>
+<span class="tag">bihar</span> · <span class="ok">✓ verified</span> · <span class="no">✗ rejected</span></p>
 
 <div class="grid">
   <div class="card">
-    <h3>Card</h3>
-    <p class="mut">Bordered panel on the panel ground. First/last child margins trimmed.</p>
+    <h3>Standalone</h3>
+    <p class="mut">One binary, one Postgres. The log, checkpoints, and in-browser verification are always on.</p>
   </div>
   <div class="card">
-    <h3>Grid</h3>
-    <p class="mut">Auto-fit, min 19rem — cards wrap responsively with no media query.</p>
+    <h3>Witnessed</h3>
+    <p class="mut">A second operator continuously demands consistency proofs and records verdicts.</p>
   </div>
   <div class="card">
-    <h3>Semantic color</h3>
-    <p><span class="ok">ok</span> and <span class="no">no</span> are state, distinct from the identity accent.</p>
+    <h3>Anchored</h3>
+    <p class="mut">Checkpoint roots pinned into an external ledger the operator does not control.</p>
   </div>
 </div>
 
-<h3 style="margin-top:1.4em">Proof / aside rail</h3>
-<div class="proof">
+<div class="proof" style="margin-top:1.2em">
   <p class="ok" style="margin:.2em 0"><b>✓ verified against the signed tree</b></p>
   <ul style="margin:.2em 0">
     <li class="ok">✓ leaf 4 is included in the tree of size 17</li>
@@ -92,28 +101,25 @@ dedi.proto.theflywheel.in/log
   </ul>
 </div>
 
-<h3 style="margin-top:1.4em">JSON viewer</h3>
-<pre id="jsondemo" class="json"></pre>
+<pre id="jsondemo" class="json" style="margin-top:1.2em"></pre>
 
-<h2 id="controls">Controls · searchbar</h2>
-<p class="mut">Text boxes, dropdowns, buttons: equal heights via shared box-sizing/padding/line-height;
-squared corners; accent focus ring.</p>
+<h2 id="controls">Controls</h2>
+
 <div class="searchbar">
-  <input type="text" placeholder="single-line input" spellcheck="false">
+  <input type="text" placeholder="widow pension" spellcheck="false">
   <select><option>mistral-3b</option><option>fuzzy/text</option><option>mistral-8b</option></select>
   <button type="button">search</button>
 </div>
-<p class="mut" style="margin-top:1em">Auto-growing textarea (<code>.autogrow</code> + <code>autogrow.js</code>):
-starts at one line, grows as you type, ignores the placeholder.</p>
-<div class="searchbar">
-  <textarea class="autogrow" rows="1" placeholder="type several lines to watch it grow, WhatsApp-style" spellcheck="false" oninput="autogrow(this)"></textarea>
+
+<div class="searchbar" style="margin-top:.8em">
+  <textarea class="autogrow" rows="1" placeholder="or describe your situation in a few lines" spellcheck="false" oninput="autogrow(this)"></textarea>
   <button type="button">AI search</button>
 </div>
 
 <hr>
-<p class="mut">Toggle theme:
+<p class="sub">
 <button type="button" onclick="const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark'">dark / light</button>
-· all colors are <code>--fw-*</code> tokens.</p>
+· <a href="https://github.com/theflywheel/flywheel-theme">theflywheel/flywheel-theme</a></p>
 
 <script src="hljson.js"></script>
 <script src="autogrow.js"></script>

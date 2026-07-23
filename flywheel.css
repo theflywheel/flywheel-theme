@@ -195,6 +195,31 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 /* WhatsApp-style growing textarea: pair with autogrow.js, rows="1" */
 textarea.autogrow { resize: none; overflow-y: auto; max-height: 8em; }
 
+/* Code blocks, IDE-flavoured.
+   pre[data-lang] shows a language label; the token colors below map the class
+   names emitted by common highlighters (highlight.js, Prism, Hugo/Chroma)
+   onto the theme palette, so server- or client-side highlighting picks up the
+   flavour with no extra stylesheet. */
+pre[data-lang] { position: relative; }
+pre[data-lang]::after {
+  content: attr(data-lang); position: absolute; top: 0.5em; right: 0.7em;
+  font-size: 0.85em; color: var(--fw-mut); letter-spacing: 0.04em;
+}
+pre .hljs-comment, pre .hljs-quote, pre .token.comment, .chroma .c, .chroma .c1, .chroma .cm, .chroma .ch {
+  color: var(--fw-mut); font-style: italic; }
+pre .hljs-keyword, pre .hljs-literal, pre .hljs-built_in, pre .hljs-type, pre .hljs-selector-tag,
+pre .token.keyword, pre .token.boolean, .chroma .k, .chroma .kd, .chroma .kt, .chroma .kn {
+  color: var(--fw-accent); }
+pre .hljs-string, pre .token.string, .chroma .s, .chroma .s1, .chroma .s2, .chroma .sb {
+  color: var(--fw-tok-str); }
+pre .hljs-number, pre .token.number, .chroma .m, .chroma .mi, .chroma .mf {
+  color: var(--fw-tok-num); }
+pre .hljs-title, pre .hljs-function, pre .token.function, .chroma .nf {
+  color: var(--fw-tok-bool); }
+pre .hljs-attr, pre .hljs-property, pre .token.property, .chroma .na, .chroma .nx {
+  color: var(--fw-tok-key); }
+pre .hljs-meta, pre .token.punctuation, .chroma .gp { color: var(--fw-mut); }
+
 /* JSON viewer token classes (pair with hljson.js) */
 .json { white-space: pre; font-size: 0.8em; max-height: 320px; overflow: auto; }
 .json .key { color: var(--fw-tok-key); }

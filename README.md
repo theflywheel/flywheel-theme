@@ -54,6 +54,15 @@ site treatment with no classes.
 `hljson.js` is the dependency-free JSON highlighter from the demo page:
 `el.innerHTML = hljson(obj)` inside an element with `class="json"`.
 
+## Code blocks
+
+- `pre[data-lang="go"]` shows a muted language label in the block's corner.
+- The stylesheet maps the token classes emitted by **highlight.js**, **Prism**,
+  and **Hugo/Chroma** onto the theme palette (comments muted-italic, keywords
+  accent, strings/numbers/functions in the token colors) — so whichever
+  highlighter the blog uses, code picks up the theme's flavour with no extra
+  stylesheet or JS from this kit.
+
 ## Typography
 
 The type system is the theme — reuse these rules even outside the stylesheet:
