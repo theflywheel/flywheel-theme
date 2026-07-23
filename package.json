@@ -1,0 +1,46 @@
+{
+  "name": "flywheel-theme",
+  "version": "1.0.0",
+  "description": "Mono/green, markdown-first CSS theme — paper ground, deep-green accent, hairline borders. One stylesheet, no build.",
+  "keywords": [
+    "css",
+    "theme",
+    "markdown",
+    "monospace",
+    "design-system",
+    "stylesheet"
+  ],
+  "homepage": "https://theflywheel.github.io/flywheel-theme/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theflywheel/flywheel-theme.git"
+  },
+  "license": "MIT",
+  "style": "flywheel.css",
+  "exports": {
+    ".": "./flywheel.css",
+    "./flywheel.css": "./flywheel.css",
+    "./theme.js": "./theme.js",
+    "./copy.js": "./copy.js",
+    "./share.js": "./share.js",
+    "./term.js": "./term.js",
+    "./autogrow.js": "./autogrow.js",
+    "./hljson.js": "./hljson.js"
+  },
+  "files": [
+    "flywheel.css",
+    "theme.js",
+    "copy.js",
+    "share.js",
+    "term.js",
+    "autogrow.js",
+    "hljson.js",
+    "note.html",
+    "og/",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.js"
+  ]
+}

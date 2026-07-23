@@ -13,9 +13,25 @@ stylesheet. Classes are additive extras.
 
 ## Use
 
+One line, pinned to a release — no build, no npm:
+
 ```html
-<link rel="stylesheet" href="flywheel.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theflywheel/flywheel-theme@1.0.0/flywheel.css">
 ```
+
+`@1.0.0` freezes the version; `@1` tracks the latest 1.x. Prefer npm, or want to
+vendor the file yourself?
+
+```sh
+npm i flywheel-theme      # then import "flywheel-theme/flywheel.css"
+```
+
+```html
+<link rel="stylesheet" href="flywheel.css">   <!-- or just copy flywheel.css in -->
+```
+
+The optional JS enhancements load the same way (`.../flywheel-theme@1.0.0/theme.js`, etc.).
+New note in seconds: copy [`note.html`](note.html) and start writing.
 
 - Reading pages (blog posts): nothing else to do — `body` is a 46em measure.
 - App-like pages: `<body class="wide">` (68em) or `class="brief"` (76em).
@@ -25,6 +41,33 @@ stylesheet. Classes are additive extras.
   wires up your own element if one has `class="theme-toggle"`.
 - All colors are `--fw-*` custom properties on `:root`; override them to
   re-skin without touching component rules.
+
+## Custom properties (re-skin)
+
+Everything themeable is a `--fw-*` variable on `:root`. Set your own on `:root`
+(or any scope) to re-skin — no component rules to touch. The dark palette is the
+same set overridden under `prefers-color-scheme: dark` / `[data-theme="dark"]`.
+
+| Property | Default (light) | Role |
+|---|---|---|
+| `--fw-bg` | `#fbfcfa` | page ground |
+| `--fw-ink` | `#1c201d` | body text |
+| `--fw-mut` | `#66706a` | muted / secondary text |
+| `--fw-accent` | `#2f6f4f` | accent — links, eyebrow, badge |
+| `--fw-accent-soft` | `#e6f0ea` | soft accent fill (badge bg, focus tint) |
+| `--fw-line` | `#d8ded9` | hairline borders |
+| `--fw-panel` | `#ffffff` | card / panel background |
+| `--fw-code-bg` | `#f2f5f2` | inline + code-block background |
+| `--fw-ok` / `--fw-bad` | `#1a7a37` / `#b00020` | status text (semantic, not accent) |
+| `--fw-tok-key/str/num/bool/null` | greens/reds/blues | JSON syntax colors (`hljson.js`) |
+| `--fw-term-bg/line/out/cmd/cmt` | tinted paper set | terminal-block colors (`term.js`) |
+| `--fw-font` | `ui-monospace, "SF Mono", Menlo, …` | base font family |
+| `--fw-size` | `13px` | base font size |
+| `--fw-measure` | `46em` | reading-column width |
+
+```css
+:root { --fw-accent: #b0472e; --fw-measure: 42em; }  /* e.g. re-skin to rust */
+```
 
 ## Components (raw HTML, drop into markdown where needed)
 
