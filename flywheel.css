@@ -151,6 +151,11 @@ nav a:hover { border-bottom: 1px solid var(--fw-accent); }
    subtext, metadata lines ("3,289 results in 0.42s"). Semantic first:
    <small> and <figcaption> get it free; .sub for block-level use. */
 small, figcaption, .sub { font-size: 0.85em; color: var(--fw-mut); line-height: 1.5; }
+
+/* image with caption: plain markdown images stay unframed; figures get a
+   hairline frame and a subtext caption */
+figure { margin: 1em 0; }
+figure img { display: block; border: 1px solid var(--fw-line); border-radius: 4px; }
 figcaption { margin-top: 0.4em; }
 
 /* lede paragraph under a title */

@@ -33,6 +33,7 @@ stylesheet. Classes are additive extras.
 | `.eyebrow` | uppercase green section label | `<p class="eyebrow">01 · System</p>` |
 | `.mut` | muted secondary text (body size) | `<span class="mut">optional</span>` |
 | `.sub` / `small` / `figcaption` | subtext tier: 0.85em + muted | `<p class="sub">3,289 results in 0.42s</p>` |
+| `figure` + `figcaption` | image with caption: hairline frame, subtext caption | `<figure><img …><figcaption>…</figcaption></figure>` |
 | `.thesis` | lede paragraph under a title | `<p class="thesis">…</p>` |
 | `.badge` | small green chip | `<span class="badge">Beckn 2.0.0</span>` |
 | `.tag` | neutral taxonomy chip | `<span class="tag">pension</span>` |
@@ -76,7 +77,9 @@ no service. Then the usual tags:
 <meta name="twitter:card" content="summary_large_image">
 ```
 
-The card is always light — link previews don't theme-switch.
+The card is always light — link previews don't theme-switch. The
+[showcase](https://theflywheel.github.io/flywheel-theme/) displays its own
+card as the figure example.
 
 ## Diagrams (mermaid)
 
