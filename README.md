@@ -37,7 +37,7 @@ stylesheet. Classes are additive extras.
 | `.cols2` | 50/50 two-column, stacks < 820px | `<div class="cols2">…</div>` |
 | `.ok` / `.no` | status text (semantic, not accent) | `<span class="ok">✓ verified</span>` |
 | `.proof` | left-rail aside (verification results) | `<div class="proof">…</div>` |
-| `.searchbar` | input + select + button row, equal heights | see demo.html |
+| `.searchbar` | input + select + button row, equal heights | see index.html |
 | `.autogrow` | WhatsApp-style growing textarea | `<textarea class="autogrow" rows="1">` + `autogrow.js` |
 | `.json` | scrolling JSON viewer | pair with `hljson.js` |
 | `nav` | element, not class — inline top nav | `<nav><a href="/">Home</a></nav>` |
@@ -75,4 +75,4 @@ The type system is the theme — reuse these rules even outside the stylesheet:
 - Semantic green (`.ok`) is distinct from the accent green: the accent is
   identity, `.ok`/`.no` are state.
 
-`demo.html` is the living spec — every element and component on one page.
+`index.html` is the living spec — every element and component on one page.
