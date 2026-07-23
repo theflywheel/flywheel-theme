@@ -270,6 +270,11 @@ pre.mermaid, .mermaid {
   background: #ffffff; border: 1px solid var(--fw-line); border-radius: 4px;
   padding: 1em; overflow-x: auto;
 }
+/* mermaid's injected styles pin 16px on diagram text regardless of config;
+   assert the theme's size so diagrams sit flush with the 13px page */
+pre.mermaid svg text, pre.mermaid svg tspan, .mermaid svg text, .mermaid svg tspan {
+  font-size: 13px !important;
+}
 
 /* JSON viewer token classes (pair with hljson.js) */
 .json { white-space: pre; font-size: 0.8em; max-height: 320px; overflow: auto; }
