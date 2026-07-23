@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    background: #fbfcfa; color: #1c201d; position: relative;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 96px;
+  }
+  body::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 14px; background: #7cc47f; }
+  .eyebrow { font-size: 26px; letter-spacing: 0.14em; text-transform: uppercase; color: #2f6f4f; margin-bottom: 26px; }
+  h1 { font-size: 74px; line-height: 1.15; letter-spacing: -1px; max-width: 950px; }
+  .sub { font-size: 31px; line-height: 1.45; color: #66706a; margin-top: 26px; max-width: 900px; }
+  .footer { position: absolute; left: 96px; bottom: 56px; font-size: 24px; color: #8a948c; }
+</style></head><body>
+  <div class="eyebrow">{{EYEBROW}}</div>
+  <h1>{{TITLE}}</h1>
+  <div class="sub">{{SUB}}</div>
+  <div class="footer">{{FOOTER}}</div>
+</body></html>

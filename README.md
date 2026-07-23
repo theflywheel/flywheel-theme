@@ -57,6 +57,27 @@ site treatment with no classes.
 `hljson.js` is the dependency-free JSON highlighter from the demo page:
 `el.innerHTML = hljson(obj)` inside an element with `class="json"`.
 
+## OG images
+
+An opinionated social card in the theme's language (accent bar, eyebrow, mono
+title, muted sub, domain footer). One design; only the text changes:
+
+```sh
+$ og/generate.sh "Post title" "field notes · registries" "One-line description." "yourdomain.in" og.png
+```
+
+Renders `og/template.html` to a 1200x630 PNG with headless Chrome — no Node,
+no service. Then the usual tags:
+
+```html
+<meta property="og:image" content="https://yourdomain.in/og/post-slug.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+```
+
+The card is always light — link previews don't theme-switch.
+
 ## Diagrams (mermaid)
 
 `pre.mermaid` renders diagrams on schematic paper — a white panel in **both**
