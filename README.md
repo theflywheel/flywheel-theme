@@ -20,8 +20,9 @@ stylesheet. Classes are additive extras.
 - Reading pages (blog posts): nothing else to do — `body` is a 46em measure.
 - App-like pages: `<body class="wide">` (68em) or `class="brief"` (76em).
 - Dark mode: automatic via `prefers-color-scheme`; force with
-  `<html data-theme="dark">` (or `"light"`) — a theme toggle just sets that
-  attribute.
+  `<html data-theme="dark">` (or `"light"`). Or include `theme.js`: a small
+  toggle appears at the top right, the choice persists in localStorage, and it
+  wires up your own element if one has `class="theme-toggle"`.
 - All colors are `--fw-*` custom properties on `:root`; override them to
   re-skin without touching component rules.
 
@@ -43,6 +44,7 @@ stylesheet. Classes are additive extras.
 | `.searchbar` | input + select + button row, equal heights | see index.html |
 | `.autogrow` | WhatsApp-style growing textarea | `<textarea class="autogrow" rows="1">` + `autogrow.js` |
 | `.json` | scrolling JSON viewer | pair with `hljson.js` |
+| `.theme-toggle` | light/dark switch, fixed top right | include `theme.js`; auto-inserted, persists in localStorage |
 | `nav` | element, not class — inline top nav | `<nav><a href="/">Home</a></nav>` |
 
 Form controls (`input`, `textarea`, `select`, `button`) are normalized at the
