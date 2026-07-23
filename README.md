@@ -39,7 +39,7 @@ stylesheet. Classes are additive extras.
 | `.card` | bordered panel | `<div class="card"><h3>…</h3><p>…</p></div>` |
 | `.grid` | responsive card grid | `<div class="grid"><div class="card">…</div>…</div>` |
 | `.cols2` | 50/50 two-column, stacks < 820px | `<div class="cols2">…</div>` |
-| `.ok` / `.no` | status text (semantic, not accent) | `<span class="ok">✓ verified</span>` |
+| `.ok` / `.no` | status text (semantic, not accent) | `<span class="ok">verified</span>` |
 | `.proof` | left-rail aside (verification results) | `<div class="proof">…</div>` |
 | `.searchbar` | input + select + button row, equal heights | see index.html |
 | `.autogrow` | WhatsApp-style growing textarea | `<textarea class="autogrow" rows="1">` + `autogrow.js` |
