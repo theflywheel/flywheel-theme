@@ -56,6 +56,24 @@ site treatment with no classes.
 `hljson.js` is the dependency-free JSON highlighter from the demo page:
 `el.innerHTML = hljson(obj)` inside an element with `class="json"`.
 
+## Diagrams (mermaid)
+
+`pre.mermaid` renders diagrams on schematic paper — a white panel in **both**
+themes, so mermaid's `neutral` theme stays legible and nothing re-renders on
+theme toggle. The library itself is not bundled; load it and init:
+
+```html
+<pre class="mermaid">
+sequenceDiagram
+    A->>B: request
+    B-->>A: response
+</pre>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'strict' });
+</script>
+```
+
 ## Code blocks
 
 Shell sessions render as a terminal — dark in both themes, green prompt,

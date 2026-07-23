@@ -65,6 +65,16 @@ dedi.proto.theflywheel.in/log        # origin
     <span class="hljs-comment">// receipts live outside the log: anchoring must never grow the tree</span>
 }</code></pre>
 
+<pre class="mermaid">
+sequenceDiagram
+    autonumber
+    participant BAP as ONIX · BAP
+    participant D as dedid
+    BAP->>D: GET /lookup/{subscriber}/{key_id}
+    D-->>BAP: signing key + inclusion proof
+    BAP->>BAP: verify signature ✓
+</pre>
+
 <table>
   <tr><th>Endpoint</th><th>Returns</th><th>Consumed by</th></tr>
   <tr><td><code>/dedi/lookup/…</code></td><td>latest record version</td><td>ONIX adapters</td></tr>
@@ -120,6 +130,10 @@ dedi.proto.theflywheel.in/log        # origin
 <hr>
 <p class="sub"><a href="https://github.com/theflywheel/flywheel-theme">theflywheel/flywheel-theme</a></p>
 
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'strict' });
+</script>
 <script src="hljson.js"></script>
 <script src="autogrow.js"></script>
 <script src="term.js"></script>

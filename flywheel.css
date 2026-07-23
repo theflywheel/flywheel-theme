@@ -239,6 +239,15 @@ pre.term .cmd { color: #e6e9e6; }
 pre.term .hljs-comment { color: #6e7a72; }
 pre.term[data-lang]::after { color: #6e7a72; }
 
+/* mermaid diagrams: schematic paper — white in BOTH themes, so mermaid's
+   standard 'neutral' theme stays legible and diagrams need no re-render when
+   the theme toggles. Load mermaid yourself (CDN or bundled) and init with
+   { startOnLoad: true, theme: 'neutral', securityLevel: 'strict' }. */
+pre.mermaid, .mermaid {
+  background: #ffffff; border: 1px solid var(--fw-line); border-radius: 4px;
+  padding: 1em; overflow-x: auto;
+}
+
 /* JSON viewer token classes (pair with hljson.js) */
 .json { white-space: pre; font-size: 0.8em; max-height: 320px; overflow: auto; }
 .json .key { color: var(--fw-tok-key); }
