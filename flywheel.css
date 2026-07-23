@@ -209,6 +209,17 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 .searchbar > :first-child { flex: 1 1 auto; }
 .searchbar > select, .searchbar > button { flex: 0 0 auto; }
 
+/* mobile: comfortable touch targets, wrapping controls, scrolling tables */
+@media (pointer: coarse) {
+  button, select, input[type="text"], input[type="search"], textarea { padding: 10px 12px; }
+  .copy-btn, .share-btn, .theme-toggle { padding: 6px 10px; }
+}
+@media (max-width: 600px) {
+  .searchbar { flex-wrap: wrap; }
+  .searchbar > :first-child { flex-basis: 100%; }
+  table { display: block; overflow-x: auto; }
+}
+
 /* light/dark toggle, fixed top right: pair with theme.js (auto-inserted
    when no element with the class exists; names the mode it switches TO) */
 .theme-toggle {

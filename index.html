@@ -21,6 +21,7 @@
 <nav><a href="#article">Article</a> <a href="#markdown">Markdown</a> <a href="#components">Components</a> <a href="#controls">Controls</a>
 <a href="https://github.com/theflywheel/flywheel-theme">GitHub</a></nav>
 
+<main>
 <p class="eyebrow">flywheel-theme</p>
 <h1>Everything on this page is the theme</h1>
 <p class="sub">One stylesheet · <a href="https://github.com/theflywheel/flywheel-theme#readme">README</a> for usage and exact values</p>
@@ -144,13 +145,13 @@ sequenceDiagram
 <h2 id="controls">Controls</h2>
 
 <div class="searchbar">
-  <input type="text" placeholder="widow pension" spellcheck="false">
-  <select><option>mistral-3b</option><option>fuzzy/text</option><option>mistral-8b</option></select>
+  <input type="text" placeholder="widow pension" aria-label="search query" spellcheck="false">
+  <select aria-label="search mode"><option>mistral-3b</option><option>fuzzy/text</option><option>mistral-8b</option></select>
   <button type="button">search</button>
 </div>
 
 <div class="searchbar" style="margin-top:.8em">
-  <textarea class="autogrow" rows="1" placeholder="or describe your situation in a few lines" spellcheck="false" oninput="autogrow(this)"></textarea>
+  <textarea class="autogrow" rows="1" placeholder="or describe your situation in a few lines" aria-label="describe your situation" spellcheck="false" oninput="autogrow(this)"></textarea>
   <button type="button">AI search</button>
 </div>
 
@@ -165,6 +166,8 @@ sequenceDiagram
     sequence: { actorFontSize: 13, messageFontSize: 13, noteFontSize: 13 }
   });
 </script>
+</main>
+
 <script src="hljson.js"></script>
 <script src="autogrow.js"></script>
 <script src="term.js"></script>
