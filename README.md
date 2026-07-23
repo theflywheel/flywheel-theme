@@ -60,6 +60,10 @@ The type system is the theme — reuse these rules even outside the stylesheet:
 - **One stack everywhere** (display, body, code, UI):
   `ui-monospace, "SF Mono", Menlo, Consolas, monospace`. No webfonts, no FOUT,
   and code samples sit flush with prose.
+- **13px base** (`--fw-size`). The live sites declare bare `font-family:
+  monospace`, which makes browsers use their default *fixed* font size (13px);
+  naming real fonts disables that quirk, so the theme sets the size explicitly
+  to render identically. Bump `--fw-size` to 14px if 13 feels small on the blog.
 - **Quiet scale**: h1 `1.3em` (−0.02em tracking), h2 `1.05em`, h3 `0.95em`,
   body `1em/1.55`. Hierarchy comes from spacing (`h2 { margin: 1.6em 0 .4em }`)
   and eyebrows, not size jumps.

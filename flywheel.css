@@ -28,6 +28,10 @@
   --fw-tok-null: #999999;
 
   --fw-font: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  /* 13px matches the live sites: they declare bare `font-family: monospace`,
+   * which triggers the browsers' default FIXED font size (13px, not 16px).
+   * Naming real fonts disables that quirk, so the size must be explicit. */
+  --fw-size: 13px;
   --fw-measure: 46em;   /* reading width; override on app-like pages */
 }
 @media (prefers-color-scheme: dark) {
@@ -62,6 +66,7 @@
 html { background: var(--fw-bg); }
 body {
   font-family: var(--fw-font);
+  font-size: var(--fw-size);
   color: var(--fw-ink);
   line-height: 1.55;
   max-width: var(--fw-measure);
