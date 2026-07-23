@@ -249,6 +249,19 @@ pre.term .cmd { color: var(--fw-term-cmd); }
 pre.term .hljs-comment { color: var(--fw-term-cmt); }
 pre.term[data-lang]::after { color: var(--fw-term-cmt); }
 
+/* copy button on code blocks (copy.js): terminals copy just the commands */
+pre.has-copy { position: relative; }
+.copy-btn {
+  position: absolute; top: 0.4em; right: 0.5em;
+  font-size: 0.85em; padding: 1px 7px; line-height: 1.4;
+  background: transparent; border: 1px solid transparent; color: var(--fw-mut);
+}
+.copy-btn:hover { border-color: var(--fw-line); color: var(--fw-accent); background: transparent; }
+pre.term .copy-btn { color: var(--fw-term-cmt); }
+pre.term .copy-btn:hover { color: var(--fw-accent); }
+/* language label steps aside when the copy button is present */
+pre.has-copy[data-lang]::after { right: 5em; }
+
 /* mermaid diagrams: schematic paper — white in BOTH themes, so mermaid's
    standard 'neutral' theme stays legible and diagrams need no re-render when
    the theme toggles. Load mermaid yourself (CDN or bundled) and init with
