@@ -56,6 +56,15 @@ site treatment with no classes.
 
 ## Code blocks
 
+Shell sessions use the terminal block — dark in both themes, green prompt,
+bright command, muted output:
+
+```html
+<pre class="term" data-lang="sh"><code><span class="p">$</span> <span class="cmd">curl -s …</span>
+output line</code></pre>
+```
+
+
 - `pre[data-lang="go"]` shows a muted language label in the block's corner.
 - The stylesheet maps the token classes emitted by **highlight.js**, **Prism**,
   and **Hugo/Chroma** onto the theme palette (comments muted-italic, keywords

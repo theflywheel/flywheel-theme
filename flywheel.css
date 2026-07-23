@@ -220,6 +220,17 @@ pre .hljs-attr, pre .hljs-property, pre .token.property, .chroma .na, .chroma .n
   color: var(--fw-tok-key); }
 pre .hljs-meta, pre .token.punctuation, .chroma .gp { color: var(--fw-mut); }
 
+/* terminal block: shell sessions are a terminal, not a code listing — dark
+   ground in BOTH themes, green prompt, bright command, muted output.
+   <pre class="term" data-lang="sh"><code><span class="p">$</span> <span class="cmd">curl …</span>
+   output line
+   </code></pre> */
+pre.term { background: #101312; border-color: #242a26; color: #9aa49d; }
+pre.term .p { color: #7cc47f; user-select: none; }
+pre.term .cmd { color: #e6e9e6; }
+pre.term .hljs-comment { color: #6e7a72; }
+pre.term[data-lang]::after { color: #6e7a72; }
+
 /* JSON viewer token classes (pair with hljson.js) */
 .json { white-space: pre; font-size: 0.8em; max-height: 320px; overflow: auto; }
 .json .key { color: var(--fw-tok-key); }
