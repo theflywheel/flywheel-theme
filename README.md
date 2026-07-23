@@ -1,5 +1,7 @@
 # flywheel-theme
 
+**Living spec / showcase: https://theflywheel.github.io/flywheel-theme/**
+
 The mono/green design language extracted from the DeDi Node pages
 (dedi.proto.theflywheel.in) and the schemes demo (schemes.proto.theflywheel.in):
 monospace everything, paper ground, deep-green accent, hairline borders.
