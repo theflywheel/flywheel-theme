@@ -47,6 +47,7 @@ stylesheet. Classes are additive extras.
 | `.json` | scrolling JSON viewer | pair with `hljson.js` |
 | `.theme-toggle` | light/dark switch, fixed top right | include `theme.js`; auto-inserted, persists in localStorage |
 | `.copy-btn` | copy button on every code block | include `copy.js`; terminal blocks copy only the command lines |
+| `.share-btn` | share button (Web Share API, clipboard fallback) | include `share.js`; place `<button class="share-btn">` where wanted |
 | `nav` | element, not class — inline top nav | `<nav><a href="/">Home</a></nav>` |
 
 Form controls (`input`, `textarea`, `select`, `button`) are normalized at the

@@ -217,6 +217,10 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 }
 .theme-toggle:hover { color: var(--fw-accent); }
 
+/* inline share button: pair with share.js (Web Share API, clipboard fallback) */
+.share-btn { font-size: 0.85em; padding: 3px 9px; color: var(--fw-mut); }
+.share-btn:hover { color: var(--fw-accent); }
+
 /* WhatsApp-style growing textarea: pair with autogrow.js, rows="1" */
 textarea.autogrow { resize: none; overflow-y: auto; max-height: 8em; }
 
