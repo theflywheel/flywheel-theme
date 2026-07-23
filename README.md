@@ -76,8 +76,9 @@ sequenceDiagram
 
 ## Code blocks
 
-Shell sessions render as a terminal — dark in both themes, green prompt,
-bright command, muted output. **`term.js` does this automatically**: it
+Shell sessions render as a terminal — prompt, command, and output each get a
+role color, themed with the page (tinted paper in light mode, near-black in
+dark). **`term.js` does this automatically**: it
 targets markdown ```sh/bash/shell/console fences (the `language-*` classes
 renderers emit) and `pre[data-lang="sh"]`. Lines starting with `$ ` become
 prompt + command, everything else is output, and a trailing ` # comment` is

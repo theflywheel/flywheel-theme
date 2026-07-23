@@ -26,6 +26,12 @@
   --fw-tok-num: #1c66b3;
   --fw-tok-bool: #8a5a00;
   --fw-tok-null: #999999;
+  /* terminal block roles */
+  --fw-term-bg: #eef2ee;
+  --fw-term-line: #d8ded9;
+  --fw-term-out: #66706a;
+  --fw-term-cmd: #1c201d;
+  --fw-term-cmt: #8a948c;
 
   --fw-font: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   /* 13px matches the live sites: they declare bare `font-family: monospace`,
@@ -42,6 +48,8 @@
     --fw-ok: #6fbf82; --fw-bad: #e07a8a;
     --fw-tok-key: #7cc47f; --fw-tok-str: #d99a8e; --fw-tok-num: #7aaede;
     --fw-tok-bool: #cfa14f; --fw-tok-null: #777f79;
+    --fw-term-bg: #101312; --fw-term-line: #242a26;
+    --fw-term-out: #9aa49d; --fw-term-cmd: #e6e9e6; --fw-term-cmt: #6e7a72;
   }
 }
 :root[data-theme="light"] {
@@ -51,6 +59,8 @@
   --fw-ok: #1a7a37; --fw-bad: #b00020;
   --fw-tok-key: #2f6f4f; --fw-tok-str: #a23c2c; --fw-tok-num: #1c66b3;
   --fw-tok-bool: #8a5a00; --fw-tok-null: #999999;
+  --fw-term-bg: #eef2ee; --fw-term-line: #d8ded9;
+  --fw-term-out: #66706a; --fw-term-cmd: #1c201d; --fw-term-cmt: #8a948c;
 }
 :root[data-theme="dark"] {
   --fw-bg: #121513; --fw-ink: #e4e8e4; --fw-mut: #9aa49d;
@@ -59,6 +69,8 @@
   --fw-ok: #6fbf82; --fw-bad: #e07a8a;
   --fw-tok-key: #7cc47f; --fw-tok-str: #d99a8e; --fw-tok-num: #7aaede;
   --fw-tok-bool: #cfa14f; --fw-tok-null: #777f79;
+  --fw-term-bg: #101312; --fw-term-line: #242a26;
+  --fw-term-out: #9aa49d; --fw-term-cmd: #e6e9e6; --fw-term-cmt: #6e7a72;
 }
 
 /* ---------- base / markdown elements (no classes needed) ---------- */
@@ -228,16 +240,14 @@ pre .hljs-attr, pre .hljs-property, pre .token.property, .chroma .na, .chroma .n
   color: var(--fw-tok-key); }
 pre .hljs-meta, pre .token.punctuation, .chroma .gp { color: var(--fw-mut); }
 
-/* terminal block: shell sessions are a terminal, not a code listing — dark
-   ground in BOTH themes, green prompt, bright command, muted output.
-   <pre class="term" data-lang="sh"><code><span class="p">$</span> <span class="cmd">curl …</span>
-   output line
-   </code></pre> */
-pre.term { background: #101312; border-color: #242a26; color: #9aa49d; }
-pre.term .p { color: #7cc47f; user-select: none; }
-pre.term .cmd { color: #e6e9e6; }
-pre.term .hljs-comment { color: #6e7a72; }
-pre.term[data-lang]::after { color: #6e7a72; }
+/* terminal block: shell sessions with prompt/command/output roles, themed
+   like everything else — tinted paper in light, near-black in dark.
+   term.js produces this markup from plain ```sh fences. */
+pre.term { background: var(--fw-term-bg); border-color: var(--fw-term-line); color: var(--fw-term-out); }
+pre.term .p { color: var(--fw-accent); user-select: none; }
+pre.term .cmd { color: var(--fw-term-cmd); }
+pre.term .hljs-comment { color: var(--fw-term-cmt); }
+pre.term[data-lang]::after { color: var(--fw-term-cmt); }
 
 /* mermaid diagrams: schematic paper — white in BOTH themes, so mermaid's
    standard 'neutral' theme stays legible and diagrams need no re-render when
