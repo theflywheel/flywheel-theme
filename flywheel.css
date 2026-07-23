@@ -1,0 +1,198 @@
+/* flywheel-theme — the mono/green language from dedi.proto + schemes.proto.
+ *
+ * Design: monospace everything, paper ground, deep-green accent, hairline
+ * borders, square-ish corners. Plain markdown output (h1..h3, p, lists,
+ * tables, code, blockquote, hr, links, images) is styled with NO classes;
+ * classed components are additive extras.
+ *
+ * Themes: light by default, dark via prefers-color-scheme, and an explicit
+ * override via <html data-theme="dark"> / <html data-theme="light">.
+ */
+
+:root {
+  --fw-bg: #fbfcfa;
+  --fw-ink: #1c201d;
+  --fw-mut: #66706a;
+  --fw-accent: #2f6f4f;
+  --fw-accent-soft: #e6f0ea;
+  --fw-line: #d8ded9;
+  --fw-panel: #ffffff;
+  --fw-code-bg: #f2f5f2;
+  --fw-ok: #1a7a37;
+  --fw-bad: #b00020;
+  /* JSON / code token colors */
+  --fw-tok-key: #2f6f4f;
+  --fw-tok-str: #a23c2c;
+  --fw-tok-num: #1c66b3;
+  --fw-tok-bool: #8a5a00;
+  --fw-tok-null: #999999;
+
+  --fw-font: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --fw-measure: 46em;   /* reading width; override on app-like pages */
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fw-bg: #121513; --fw-ink: #e4e8e4; --fw-mut: #9aa49d;
+    --fw-accent: #7cc47f; --fw-accent-soft: #1d2b22; --fw-line: #2a312c;
+    --fw-panel: #181c19; --fw-code-bg: #1d221e;
+    --fw-ok: #6fbf82; --fw-bad: #e07a8a;
+    --fw-tok-key: #7cc47f; --fw-tok-str: #d99a8e; --fw-tok-num: #7aaede;
+    --fw-tok-bool: #cfa14f; --fw-tok-null: #777f79;
+  }
+}
+:root[data-theme="light"] {
+  --fw-bg: #fbfcfa; --fw-ink: #1c201d; --fw-mut: #66706a;
+  --fw-accent: #2f6f4f; --fw-accent-soft: #e6f0ea; --fw-line: #d8ded9;
+  --fw-panel: #ffffff; --fw-code-bg: #f2f5f2;
+  --fw-ok: #1a7a37; --fw-bad: #b00020;
+  --fw-tok-key: #2f6f4f; --fw-tok-str: #a23c2c; --fw-tok-num: #1c66b3;
+  --fw-tok-bool: #8a5a00; --fw-tok-null: #999999;
+}
+:root[data-theme="dark"] {
+  --fw-bg: #121513; --fw-ink: #e4e8e4; --fw-mut: #9aa49d;
+  --fw-accent: #7cc47f; --fw-accent-soft: #1d2b22; --fw-line: #2a312c;
+  --fw-panel: #181c19; --fw-code-bg: #1d221e;
+  --fw-ok: #6fbf82; --fw-bad: #e07a8a;
+  --fw-tok-key: #7cc47f; --fw-tok-str: #d99a8e; --fw-tok-num: #7aaede;
+  --fw-tok-bool: #cfa14f; --fw-tok-null: #777f79;
+}
+
+/* ---------- base / markdown elements (no classes needed) ---------- */
+
+html { background: var(--fw-bg); }
+body {
+  font-family: var(--fw-font);
+  color: var(--fw-ink);
+  line-height: 1.55;
+  max-width: var(--fw-measure);
+  margin: 1.5em auto;
+  padding: 0 1em;
+}
+
+h1 { font-size: 1.3em;  letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-size: 1.05em; margin: 1.6em 0 0.4em; }
+h3 { font-size: 0.95em; margin: 1.3em 0 0.3em; }
+h1, h2, h3 { line-height: 1.3; }
+
+p { margin: 0.7em 0; }
+
+a { color: var(--fw-accent); text-decoration: none; border-bottom: 1px solid var(--fw-line); }
+a:hover, a:focus-visible { border-bottom-color: var(--fw-accent); outline: none; }
+
+ul, ol { padding-left: 1.3em; margin: 0.5em 0; }
+li { margin: 0.3em 0; }
+li::marker { color: var(--fw-accent); }
+
+strong { color: var(--fw-ink); }
+hr { border: 0; border-top: 1px solid var(--fw-line); margin: 2em 0; }
+
+img { max-width: 100%; height: auto; }
+
+blockquote {
+  margin: 1em 0; padding: 0.1em 0 0.1em 0.9em;
+  border-left: 3px solid var(--fw-accent);
+  color: var(--fw-mut);
+}
+
+code {
+  background: var(--fw-code-bg);
+  padding: 0.05em 0.3em; border-radius: 3px;
+  font-family: var(--fw-font); font-size: 0.92em;
+}
+pre {
+  background: var(--fw-code-bg);
+  border: 1px solid var(--fw-line); border-radius: 4px;
+  padding: 0.8em 1em; overflow-x: auto;
+  font-size: 0.85em; line-height: 1.5;
+}
+pre code { background: transparent; padding: 0; font-size: inherit; }
+
+table { border-collapse: collapse; width: 100%; font-size: 0.9em; margin: 0.8em 0; }
+th, td { border: 1px solid var(--fw-line); padding: 0.35em 0.55em; text-align: left; vertical-align: top; }
+th { background: var(--fw-code-bg); font-size: 0.85em; letter-spacing: 0.04em; }
+td { font-variant-numeric: tabular-nums; }
+
+::selection { background: var(--fw-accent-soft); }
+
+/* ---------- components ---------- */
+
+/* top navigation: <nav><a>…</a> <a>…</a></nav> */
+nav { margin-bottom: 1em; }
+nav a { margin-right: 1em; border-bottom: none; }
+nav a:hover { border-bottom: 1px solid var(--fw-accent); }
+
+/* uppercase section label, use above an h1/h2 */
+.eyebrow {
+  font-size: 0.72em; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--fw-accent); margin: 0 0 0.35em;
+}
+
+/* muted/secondary text */
+.mut { color: var(--fw-mut); }
+
+/* lede paragraph under a title */
+.thesis { color: var(--fw-mut); max-width: 62ch; }
+
+/* small green chip: <span class="badge">Beckn 2.0.0</span> */
+.badge {
+  display: inline-block; background: var(--fw-accent-soft); color: var(--fw-accent);
+  border-radius: 3px; padding: 1px 7px; font-size: 0.72em;
+  letter-spacing: 0.03em; vertical-align: middle;
+}
+
+/* neutral chip for taxonomy: <span class="tag">pension</span> */
+.tag {
+  display: inline-block; background: var(--fw-code-bg); border-radius: 3px;
+  padding: 1px 7px; font-size: 0.82em; margin-right: 0.3em; white-space: nowrap;
+}
+
+/* bordered box: <div class="card"><h3>…</h3><p>…</p></div> */
+.card {
+  border: 1px solid var(--fw-line); border-radius: 4px;
+  padding: 0.9em 1em; background: var(--fw-panel);
+}
+.card > :first-child { margin-top: 0; }
+.card > :last-child { margin-bottom: 0; }
+
+/* responsive card/two-column grid */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 1rem; }
+.cols2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 1.4em; align-items: start; }
+@media (max-width: 820px) { .cols2 { grid-template-columns: 1fr; } }
+
+/* status text */
+.ok { color: var(--fw-ok); }
+.no { color: var(--fw-bad); }
+
+/* verification / aside block with a rail */
+.proof { border-left: 3px solid var(--fw-line); padding-left: 0.8em; }
+
+/* form controls, normalized to equal height (the searchbar language) */
+input[type="text"], input[type="search"], textarea, select, button {
+  box-sizing: border-box; border: 1px solid var(--fw-line);
+  padding: 8px 10px; font: inherit; line-height: 1.5;
+  background: var(--fw-panel); color: var(--fw-ink); border-radius: 0;
+}
+select, button { cursor: pointer; }
+button:hover { border-color: var(--fw-accent); }
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--fw-accent); outline-offset: -1px;
+}
+.searchbar { display: flex; align-items: flex-end; gap: 8px; }
+.searchbar > :first-child { flex: 1 1 auto; }
+.searchbar > select, .searchbar > button { flex: 0 0 auto; }
+
+/* JSON viewer token classes (pair with hljson.js) */
+.json { white-space: pre; font-size: 0.8em; max-height: 320px; overflow: auto; }
+.json .key { color: var(--fw-tok-key); }
+.json .str { color: var(--fw-tok-str); }
+.json .num { color: var(--fw-tok-num); }
+.json .bool { color: var(--fw-tok-bool); }
+.json .null { color: var(--fw-tok-null); }
+
+/* page-width variants: <body class="wide"> for app-like pages */
+body.wide { max-width: 68em; }
+body.brief { max-width: 76em; }
+
+@media (prefers-reduced-motion: no-preference) {
+  a, button { transition: border-color 120ms ease; }
+}

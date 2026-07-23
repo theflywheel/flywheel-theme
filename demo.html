@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>flywheel-theme · living spec</title>
+<link rel="stylesheet" href="flywheel.css">
+</head>
+<body class="wide">
+
+<nav><a href="#type">Type</a> <a href="#markdown">Markdown</a> <a href="#components">Components</a> <a href="#controls">Controls</a></nav>
+
+<p class="eyebrow">flywheel-theme</p>
+<h1>The mono/green language, as one stylesheet</h1>
+<p class="thesis">Extracted from the DeDi Explorer, Docs, and the schemes demo. Plain markdown needs
+no classes; everything below the Markdown section renders from bare elements.</p>
+
+<h2 id="type">Type specimen</h2>
+<p class="mut">One stack: <code>ui-monospace, "SF Mono", Menlo, Consolas, monospace</code>. The scale is
+deliberately quiet — hierarchy comes from spacing and eyebrows, not size jumps.</p>
+<div class="card">
+  <p class="eyebrow">eyebrow · 0.72em · caps · +0.14em tracking</p>
+  <h1 style="margin:.2em 0">Heading one · 1.3em, −0.02em</h1>
+  <h2 style="margin:.4em 0">Heading two · 1.05em</h2>
+  <h3 style="margin:.4em 0">Heading three · 0.95em</h3>
+  <p>Body · 1em / 1.55 line-height · 46em reading measure (this page uses <code>.wide</code>, 68em).</p>
+  <p class="mut">Muted · used for ledes, captions, metadata rows like <span class="mut">state · category · opened 2026</span></p>
+  <p style="font-variant-numeric: tabular-nums">Tabular figures in data: 3,289 schemes · 0.005 WAY · tree size 17</p>
+</div>
+
+<h2 id="markdown">Markdown elements (zero classes)</h2>
+
+<p>A paragraph with a <a href="#">link</a>, some <strong>bold</strong>, and <code>inline code</code>.
+Links carry a hairline underline that turns accent on hover.</p>
+
+<ul>
+  <li>list markers are accent green</li>
+  <li>spacing is compact: <code>0.3em</code> between items</li>
+</ul>
+<ol>
+  <li>ordered works the same</li>
+  <li>numbers inherit the marker color</li>
+</ol>
+
+<blockquote>Blockquote: accent rail, muted ink. Good for pull-quotes and asides in posts.</blockquote>
+
+<pre><code>$ curl -s "https://dedi.proto.theflywheel.in/dedi/log/checkpoint"
+dedi.proto.theflywheel.in/log
+17
+/L8CZJh/MYGMFWDP12ej...</code></pre>
+
+<table>
+  <tr><th>Endpoint</th><th>Returns</th><th>Calls</th></tr>
+  <tr><td><code>/dedi/lookup/…</code></td><td>latest record version</td><td>41,204</td></tr>
+  <tr><td><code>/dedi/log/checkpoint</code></td><td>signed tree head</td><td>2,881</td></tr>
+</table>
+
+<hr>
+
+<h2 id="components">Components</h2>
+
+<p><span class="badge">badge · accent chip</span> <span class="tag">tag</span> <span class="tag">neutral</span>
+<span class="tag">taxonomy</span> · status: <span class="ok">✓ verified</span> / <span class="no">✗ rejected</span></p>
+
+<div class="grid">
+  <div class="card">
+    <h3>Card</h3>
+    <p class="mut">Bordered panel on the panel ground. First/last child margins trimmed.</p>
+  </div>
+  <div class="card">
+    <h3>Grid</h3>
+    <p class="mut">Auto-fit, min 19rem — cards wrap responsively with no media query.</p>
+  </div>
+  <div class="card">
+    <h3>Semantic color</h3>
+    <p><span class="ok">ok</span> and <span class="no">no</span> are state, distinct from the identity accent.</p>
+  </div>
+</div>
+
+<h3 style="margin-top:1.4em">Proof / aside rail</h3>
+<div class="proof">
+  <p class="ok" style="margin:.2em 0"><b>✓ verified against the signed tree</b></p>
+  <ul style="margin:.2em 0">
+    <li class="ok">✓ leaf 4 is included in the tree of size 17</li>
+    <li class="ok">✓ checkpoint signed by dedi.proto.theflywheel.in</li>
+  </ul>
+</div>
+
+<h3 style="margin-top:1.4em">JSON viewer</h3>
+<pre id="jsondemo" class="json"></pre>
+
+<h2 id="controls">Controls · searchbar</h2>
+<p class="mut">Equal heights via shared box-sizing/padding/line-height; squared corners.</p>
+<div class="searchbar">
+  <input type="text" placeholder="widow pension · or ask a question" spellcheck="false">
+  <select><option>mistral-3b</option><option>fuzzy/text</option></select>
+  <button type="button">search</button>
+</div>
+
+<hr>
+<p class="mut">Toggle theme:
+<button type="button" onclick="const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark'">dark / light</button>
+· all colors are <code>--fw-*</code> tokens.</p>
+
+<script src="hljson.js"></script>
+<script>
+document.getElementById('jsondemo').innerHTML = hljson({
+  message: "Resource retrieved successfully",
+  data: { details: { signing_public_key: "dGhpcyBpcyBhIGtleQ==", type: "BPP" },
+          network_memberships: ["beckn.one/testnet"], ttl: 3600, verified: true, proof: null }
+});
+</script>
+</body>
+</html>
