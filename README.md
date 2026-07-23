@@ -38,8 +38,15 @@ stylesheet. Classes are additive extras.
 | `.ok` / `.no` | status text (semantic, not accent) | `<span class="ok">✓ verified</span>` |
 | `.proof` | left-rail aside (verification results) | `<div class="proof">…</div>` |
 | `.searchbar` | input + select + button row, equal heights | see demo.html |
+| `.autogrow` | WhatsApp-style growing textarea | `<textarea class="autogrow" rows="1">` + `autogrow.js` |
 | `.json` | scrolling JSON viewer | pair with `hljson.js` |
 | `nav` | element, not class — inline top nav | `<nav><a href="/">Home</a></nav>` |
+
+Form controls (`input`, `textarea`, `select`, `button`) are normalized at the
+element level too: shared padding/line-height so mixed rows sit at equal
+heights, squared corners, hairline borders, accent focus ring. Links and `nav`
+are likewise element-level — bare markdown links and a bare `<nav>` get the
+site treatment with no classes.
 
 `hljson.js` is the dependency-free JSON highlighter from the demo page:
 `el.innerHTML = hljson(obj)` inside an element with `class="json"`.

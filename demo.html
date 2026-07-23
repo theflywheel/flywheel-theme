@@ -90,11 +90,18 @@ dedi.proto.theflywheel.in/log
 <pre id="jsondemo" class="json"></pre>
 
 <h2 id="controls">Controls · searchbar</h2>
-<p class="mut">Equal heights via shared box-sizing/padding/line-height; squared corners.</p>
+<p class="mut">Text boxes, dropdowns, buttons: equal heights via shared box-sizing/padding/line-height;
+squared corners; accent focus ring.</p>
 <div class="searchbar">
-  <input type="text" placeholder="widow pension · or ask a question" spellcheck="false">
-  <select><option>mistral-3b</option><option>fuzzy/text</option></select>
+  <input type="text" placeholder="single-line input" spellcheck="false">
+  <select><option>mistral-3b</option><option>fuzzy/text</option><option>mistral-8b</option></select>
   <button type="button">search</button>
+</div>
+<p class="mut" style="margin-top:1em">Auto-growing textarea (<code>.autogrow</code> + <code>autogrow.js</code>):
+starts at one line, grows to <code>max-height</code>, ignores the placeholder.</p>
+<div class="searchbar">
+  <textarea class="autogrow" rows="1" placeholder="type several lines to watch it grow, WhatsApp-style" spellcheck="false" oninput="autogrow(this)"></textarea>
+  <button type="button">AI search</button>
 </div>
 
 <hr>
@@ -103,6 +110,7 @@ dedi.proto.theflywheel.in/log
 · all colors are <code>--fw-*</code> tokens.</p>
 
 <script src="hljson.js"></script>
+<script src="autogrow.js"></script>
 <script>
 document.getElementById('jsondemo').innerHTML = hljson({
   message: "Resource retrieved successfully",

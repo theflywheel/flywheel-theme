@@ -181,6 +181,9 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 .searchbar > :first-child { flex: 1 1 auto; }
 .searchbar > select, .searchbar > button { flex: 0 0 auto; }
 
+/* WhatsApp-style growing textarea: pair with autogrow.js, rows="1" */
+textarea.autogrow { resize: none; overflow-y: auto; max-height: 8em; }
+
 /* JSON viewer token classes (pair with hljson.js) */
 .json { white-space: pre; font-size: 0.8em; max-height: 320px; overflow: auto; }
 .json .key { color: var(--fw-tok-key); }
