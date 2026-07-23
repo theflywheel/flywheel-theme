@@ -15,18 +15,23 @@
 <p class="thesis">Extracted from the DeDi Explorer, Docs, and the schemes demo. Plain markdown needs
 no classes; everything below the Markdown section renders from bare elements.</p>
 
-<h2 id="type">Type specimen</h2>
-<p class="mut">One stack: <code>ui-monospace, "SF Mono", Menlo, Consolas, monospace</code>. The scale is
-deliberately quiet — hierarchy comes from spacing and eyebrows, not size jumps.</p>
+<h2 id="type">Type</h2>
+<p class="mut">One monospace stack for everything; a quiet scale where hierarchy comes from
+spacing and eyebrows, not size jumps. Judged by reading, not by numbers &mdash; exact values are in the
+<a href="https://github.com/theflywheel/flywheel-theme#typography">README</a>.</p>
 <div class="card">
-  <p class="eyebrow">eyebrow · 0.72em · caps · +0.14em tracking</p>
-  <h1 style="margin:.2em 0">Heading one · 1.3em, −0.02em</h1>
-  <h2 style="margin:.4em 0">Heading two · 1.05em</h2>
-  <h3 style="margin:.4em 0">Heading three · 0.95em</h3>
-  <p>Body · 1em / 1.55 line-height · 46em reading measure (this page uses <code>.wide</code>, 68em).</p>
-  <p class="mut">Muted · body-size secondary text, metadata rows like <span class="mut">state · category · opened 2026</span></p>
-  <p class="sub">Subtext · 0.85em muted · counts, captions, result subtext: 3,289 results in 0.42s · also via <code>&lt;small&gt;</code> and <code>&lt;figcaption&gt;</code></p>
-  <p style="font-variant-numeric: tabular-nums">Tabular figures in data: 3,289 schemes · 0.005 WAY · tree size 17</p>
+  <p class="eyebrow">field notes &middot; registries</p>
+  <h1 style="margin:.2em 0">Why the registry is the interesting part</h1>
+  <p class="thesis">Every network has a phone book. The question is who gets to edit it,
+  and whether anyone can prove they cheated.</p>
+  <h2>The operator is the attack surface</h2>
+  <p>When two parties exchange signed messages, the receiver&rsquo;s real question is not
+  <em>is this signature valid</em> but <em>whose key am I checking it against</em>. That answer
+  comes from a registry &mdash; which makes the registry operator the one party worth compromising.</p>
+  <h3>What transparency actually buys</h3>
+  <p>An append-only log doesn&rsquo;t stop the operator from lying. It makes the lie
+  <strong>provable</strong> &mdash; which, for institutions, is the property that matters.</p>
+  <p class="sub">Published 2026-07-23 &middot; 6 min read &middot; part of the DeDi notes</p>
 </div>
 
 <h2 id="markdown">Markdown elements (zero classes)</h2>
@@ -99,7 +104,7 @@ squared corners; accent focus ring.</p>
   <button type="button">search</button>
 </div>
 <p class="mut" style="margin-top:1em">Auto-growing textarea (<code>.autogrow</code> + <code>autogrow.js</code>):
-starts at one line, grows to <code>max-height</code>, ignores the placeholder.</p>
+starts at one line, grows as you type, ignores the placeholder.</p>
 <div class="searchbar">
   <textarea class="autogrow" rows="1" placeholder="type several lines to watch it grow, WhatsApp-style" spellcheck="false" oninput="autogrow(this)"></textarea>
   <button type="button">AI search</button>
