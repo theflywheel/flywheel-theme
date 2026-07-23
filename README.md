@@ -56,13 +56,18 @@ site treatment with no classes.
 
 ## Code blocks
 
-Shell sessions use the terminal block — dark in both themes, green prompt,
-bright command, muted output:
+Shell sessions render as a terminal — dark in both themes, green prompt,
+bright command, muted output. **`term.js` does this automatically**: it
+targets markdown ```sh/bash/shell/console fences (the `language-*` classes
+renderers emit) and `pre[data-lang="sh"]`. Lines starting with `$ ` become
+prompt + command, everything else is output, and a trailing ` # comment` is
+dimmed. Idempotent; auto-runs on load; call `termify(container)` after
+inserting blocks dynamically. No hand-written spans needed — write the fence:
 
-```html
-<pre class="term" data-lang="sh"><code><span class="p">$</span> <span class="cmd">curl -s …</span>
-output line</code></pre>
-```
+    ```sh
+    $ curl -s https://dedi.proto.theflywheel.in/dedi/log/checkpoint
+    dedi.proto.theflywheel.in/log   # origin
+    ```
 
 
 - `pre[data-lang="go"]` shows a muted language label in the block's corner.

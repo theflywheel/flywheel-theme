@@ -49,11 +49,12 @@ and <code>inline code</code>.</p>
 
 <blockquote>Governance that cannot be audited is not governance.</blockquote>
 
-<pre class="term" data-lang="sh"><code><span class="p">$</span> <span class="cmd">curl -s https://dedi.proto.theflywheel.in/dedi/log/checkpoint</span>
-dedi.proto.theflywheel.in/log        <span class="hljs-comment"># origin</span>
-17                                   <span class="hljs-comment"># tree size</span>
-/L8CZJh/MYGMFWDP12ejc4Y6Vpr…         <span class="hljs-comment"># root hash</span>
-— dedi.proto.theflywheel.in Az3grl…  <span class="hljs-comment"># Ed25519 signature</span></code></pre>
+<!-- a plain markdown-style fence; term.js turns it into a terminal block -->
+<pre><code class="language-sh">$ curl -s https://dedi.proto.theflywheel.in/dedi/log/checkpoint
+dedi.proto.theflywheel.in/log        # origin
+17                                   # tree size
+/L8CZJh/MYGMFWDP12ejc4Y6Vpr…         # root hash
+— dedi.proto.theflywheel.in Az3grl…  # Ed25519 signature</code></pre>
 
 <pre data-lang="go"><code><span class="hljs-comment">// Anchor publishes the checkpoint and returns where it landed.</span>
 <span class="hljs-keyword">func</span> (c *CORD) <span class="hljs-title">Anchor</span>(ctx context.Context, checkpoint []<span class="hljs-type">byte</span>) (Ref, <span class="hljs-type">error</span>) {
@@ -123,6 +124,7 @@ dedi.proto.theflywheel.in/log        <span class="hljs-comment"># origin</span>
 
 <script src="hljson.js"></script>
 <script src="autogrow.js"></script>
+<script src="term.js"></script>
 <script>
 document.getElementById('jsondemo').innerHTML = hljson({
   message: "Resource retrieved successfully",
