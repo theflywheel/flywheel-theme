@@ -88,6 +88,7 @@ same set overridden under `prefers-color-scheme: dark` / `[data-theme="dark"]`.
 | `.searchbar` | input + select + button row, equal heights | see index.html |
 | `.autogrow` | WhatsApp-style growing textarea | `<textarea class="autogrow" rows="1">` + `autogrow.js` |
 | `.json` | scrolling JSON viewer | pair with `hljson.js` |
+| `md()` | tiny safe markdown renderer (headings, lists, tables, fences, links) | `md.js`; escape-first, XSS-safe for LLM output; fences feed `term.js`/token styles |
 | `.theme-toggle` | light/dark switch, fixed top right | include `theme.js`; auto-inserted, persists in localStorage |
 | `.copy-btn` | copy button on every code block | include `copy.js`; terminal blocks copy only the command lines |
 | `.share-btn` | share button (Web Share API, clipboard fallback) | include `share.js`; place `<button class="share-btn">` where wanted |

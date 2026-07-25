@@ -104,6 +104,9 @@ sequenceDiagram
   opinionated OG design: accent bar, eyebrow, title, one-liner, domain. Always light.</figcaption>
 </figure>
 
+<p class="sub">below: model output rendered by <code>md.js</code> — the same renderer the blog uses</p>
+<div class="card" id="mddemo"></div>
+
 <table>
   <tr><th>Endpoint</th><th>Returns</th><th>Consumed by</th></tr>
   <tr><td><code>/dedi/lookup/…</code></td><td>latest record version</td><td>ONIX adapters</td></tr>
@@ -169,6 +172,7 @@ sequenceDiagram
 </script>
 </main>
 
+<script src="md.js"></script>
 <script src="hljson.js"></script>
 <script src="autogrow.js"></script>
 <script src="term.js"></script>
@@ -176,6 +180,20 @@ sequenceDiagram
 <script src="share.js"></script>
 <script src="theme.js"></script>
 <script>
+document.getElementById('mddemo').innerHTML = md([
+  '## Should you sell this week?',
+  '',
+  '**Onion (modal ₹3600/quintal)** at Kannur Market today; rain chance is *100%* for 5 days.',
+  '',
+  '- harvest ripe stock now, dry before storage',
+  '- hold only if prices are expected to rise',
+  '',
+  '| market | modal | date |',
+  '|---|---|---|',
+  '| Kannur | 3600 | 2026-07-25 |',
+  '',
+  '> grounded in live Beckn discover calls across mandi and weather catalogs'
+].join('\n'));
 document.getElementById('jsondemo').innerHTML = hljson({
   message: "Resource retrieved successfully",
   data: { details: { signing_public_key: "dGhpcyBpcyBhIGtleQ==", type: "BPP" },
