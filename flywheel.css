@@ -194,6 +194,28 @@ figcaption { margin-top: 0.4em; }
 /* verification / aside block with a rail */
 .proof { border-left: 3px solid var(--fw-line); padding-left: 0.8em; }
 
+/* data table: pair with datatable.js (@tanstack/table-core engine).
+   <div data-fw-table>…</div>, or fwDataTable(el, {columns, data}). Sortable
+   headers, a global filter, and pagination — all layered on the theme's plain
+   table + control base, so it reads as the same system. */
+.fw-datatable { margin: 0.8em 0; }
+.fw-datatable table { margin: 0; }
+.fw-dt-bar { display: flex; align-items: center; gap: 0.7em; margin-bottom: 0.5em; }
+.fw-dt-filter { flex: 0 1 16em; min-width: 0; }
+.fw-dt-count { margin-left: auto; font-size: 0.85em; color: var(--fw-mut); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fw-dt-scroll { overflow-x: auto; }
+.fw-datatable th.fw-dt-sortable { cursor: pointer; user-select: none; white-space: nowrap; }
+.fw-datatable th.fw-dt-sortable:hover { color: var(--fw-accent); }
+.fw-datatable th[aria-sort] { color: var(--fw-accent); }
+.fw-datatable th.fw-dt-sortable:focus-visible { outline: 2px solid var(--fw-accent); outline-offset: -2px; }
+.fw-dt-sort { font-size: 0.8em; margin-left: 0.15em; }
+.fw-datatable tbody tr:hover { background: var(--fw-accent-soft); }
+.fw-dt-empty { color: var(--fw-mut); text-align: center; }
+.fw-dt-pager { display: flex; align-items: center; gap: 0.7em; margin-top: 0.5em; }
+.fw-dt-pager button { padding: 3px 10px; font-size: 0.85em; }
+.fw-dt-pager button:disabled { opacity: 0.4; cursor: default; border-color: var(--fw-line); }
+.fw-dt-page { font-size: 0.85em; color: var(--fw-mut); font-variant-numeric: tabular-nums; }
+
 /* form controls, normalized to equal height (the searchbar language) */
 input[type="text"], input[type="search"], textarea, select, button {
   box-sizing: border-box; border: 1px solid var(--fw-line);

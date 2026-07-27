@@ -1,7 +1,7 @@
 {
   "name": "flywheel-theme",
   "version": "1.0.0",
-  "description": "Mono/green, markdown-first CSS theme — paper ground, deep-green accent, hairline borders. One stylesheet, no build.",
+  "description": "Mono/green, markdown-first CSS theme \u2014 paper ground, deep-green accent, hairline borders. One stylesheet, no build.",
   "keywords": [
     "css",
     "theme",
@@ -25,7 +25,9 @@
     "./share.js": "./share.js",
     "./term.js": "./term.js",
     "./autogrow.js": "./autogrow.js",
-    "./hljson.js": "./hljson.js"
+    "./hljson.js": "./hljson.js",
+    "./datatable.js": "./datatable.js",
+    "./vendor/table-core.mjs": "./vendor/table-core.mjs"
   },
   "files": [
     "flywheel.css",
@@ -38,9 +40,14 @@
     "note.html",
     "og/",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "datatable.js",
+    "vendor/"
   ],
   "sideEffects": [
     "*.js"
-  ]
+  ],
+  "dependencies": {
+    "@tanstack/table-core": "^8.21.3"
+  }
 }

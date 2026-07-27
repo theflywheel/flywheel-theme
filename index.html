@@ -159,6 +159,45 @@ sequenceDiagram
   <button type="button">AI search</button>
 </div>
 
+<h2 id="datatable">Data table</h2>
+<p class="sub">headless <a href="https://tanstack.com/table/latest/docs/api/core/table">@tanstack/table-core</a>
+engine, flywheel skin — click a header to sort, type to filter, page through. Declarative via
+<code>data-fw-table</code>, or <code>fwDataTable(el, {columns, data})</code>.</p>
+<div data-fw-table>
+  <script type="application/json">
+  {
+    "pageSize": 8,
+    "columns": [
+      { "accessorKey": "crop", "header": "crop" },
+      { "accessorKey": "market", "header": "market" },
+      { "accessorKey": "state", "header": "state" },
+      { "accessorKey": "modal", "header": "modal ₹/qtl" },
+      { "accessorKey": "date", "header": "date" }
+    ],
+    "data": [
+      { "crop": "onion", "market": "Lasalgaon", "state": "Maharashtra", "modal": 2149, "date": "2026-07-21" },
+      { "crop": "onion", "market": "Pune", "state": "Maharashtra", "modal": 1800, "date": "2026-07-24" },
+      { "crop": "potato", "market": "Agra", "state": "Uttar Pradesh", "modal": 1250, "date": "2026-07-25" },
+      { "crop": "potato", "market": "Darbhanga", "state": "Bihar", "modal": 1100, "date": "2026-07-24" },
+      { "crop": "tomato", "market": "Kolar", "state": "Karnataka", "modal": 2600, "date": "2026-07-23" },
+      { "crop": "tomato", "market": "Nashik", "state": "Maharashtra", "modal": 2200, "date": "2026-07-25" },
+      { "crop": "soybean", "market": "Indore", "state": "Madhya Pradesh", "modal": 4650, "date": "2026-07-24" },
+      { "crop": "soybean", "market": "Akola", "state": "Maharashtra", "modal": 4520, "date": "2026-07-22" },
+      { "crop": "cotton", "market": "Rajkot", "state": "Gujarat", "modal": 7300, "date": "2026-07-25" },
+      { "crop": "cotton", "market": "Adilabad", "state": "Telangana", "modal": 7100, "date": "2026-07-23" },
+      { "crop": "wheat", "market": "Karnal", "state": "Haryana", "modal": 2450, "date": "2026-07-21" },
+      { "crop": "wheat", "market": "Sehore", "state": "Madhya Pradesh", "modal": 2380, "date": "2026-07-24" },
+      { "crop": "chickpea", "market": "Bikaner", "state": "Rajasthan", "modal": 5600, "date": "2026-07-22" },
+      { "crop": "chickpea", "market": "Latur", "state": "Maharashtra", "modal": 5450, "date": "2026-07-25" },
+      { "crop": "maize", "market": "Davangere", "state": "Karnataka", "modal": 2100, "date": "2026-07-23" },
+      { "crop": "banana", "market": "Jalgaon", "state": "Maharashtra", "modal": 1600, "date": "2026-07-24" },
+      { "crop": "mustard", "market": "Bharatpur", "state": "Rajasthan", "modal": 5300, "date": "2026-07-25" },
+      { "crop": "paddy", "market": "Karnal", "state": "Haryana", "modal": 2100, "date": "2026-07-22" }
+    ]
+  }
+  </script>
+</div>
+
 <hr>
 <p class="sub"><a href="https://github.com/theflywheel/flywheel-theme">theflywheel/flywheel-theme</a></p>
 
@@ -179,6 +218,7 @@ sequenceDiagram
 <script src="copy.js"></script>
 <script src="share.js"></script>
 <script src="theme.js"></script>
+<script type="module" src="datatable.js"></script>
 <script>
 document.getElementById('mddemo').innerHTML = md([
   '## Should you sell this week?',

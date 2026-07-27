@@ -88,6 +88,7 @@ same set overridden under `prefers-color-scheme: dark` / `[data-theme="dark"]`.
 | `.searchbar` | input + select + button row, equal heights | see index.html |
 | `.autogrow` | WhatsApp-style growing textarea | `<textarea class="autogrow" rows="1">` + `autogrow.js` |
 | `.json` | scrolling JSON viewer | pair with `hljson.js` |
+| `.fw-datatable` | sortable / filterable / paginated data table | `<div data-fw-table>` + JSON config, or `fwDataTable(el, {columns, data})`; load `datatable.js` (see below) |
 | `md()` | tiny safe markdown renderer (headings, lists, tables, fences, links) | `md.js`; escape-first, XSS-safe for LLM output; fences feed `term.js`/token styles |
 | `.theme-toggle` | light/dark switch, fixed top right | include `theme.js`; auto-inserted, persists in localStorage |
 | `.copy-btn` | copy button on every code block | include `copy.js`; terminal blocks copy only the command lines |
@@ -102,6 +103,29 @@ site treatment with no classes.
 
 `hljson.js` is the dependency-free JSON highlighter from the demo page:
 `el.innerHTML = hljson(obj)` inside an element with `class="json"`.
+
+`datatable.js` is the one component with a real engine:
+[`@tanstack/table-core`](https://tanstack.com/table) (headless — it owns sorting,
+filtering, and pagination; the flywheel `.fw-datatable` CSS owns the look). It
+loads as an **ES module** and stays no-build — table-core is vendored at
+`vendor/table-core.mjs`, so there is nothing to bundle:
+
+```html
+<link rel="stylesheet" href="flywheel.css">
+<div data-fw-table><script type="application/json">
+  { "columns": ["crop", "market", "modal"],
+    "data": [ { "crop": "onion", "market": "Lasalgaon", "modal": 2149 }, … ],
+    "pageSize": 10 }
+</script></div>
+<script type="module" src="datatable.js"></script>
+```
+
+`columns` entries are either a string (used as both `accessorKey` and header) or
+a `{ accessorKey, header }` object. Auto-inits every `[data-fw-table]` on load;
+or call `fwDataTable(el, { columns, data, pageSize, filter })` yourself. Click a
+header to sort (asc → desc → off), type in the bar to filter, page controls
+appear when rows exceed `pageSize`. Global filter and pagination are hidden when
+not needed.
 
 ## OG images
 
