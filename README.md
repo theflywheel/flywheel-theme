@@ -177,6 +177,53 @@ Width is the axis everyone remembers; height is the one that breaks a phone.
 - Touch targets meet 44px under `pointer: coarse`.
 - Base size drops from 13px to 16px under 640px.
 
+## Icons
+
+Sixteen line icons by default, 24×24, taking their colour from `currentColor`
+so light and dark need no second set.
+
+```html
+<!-- one request, cached, no JS -->
+<link rel="stylesheet" href="flywheel.css">
+<svg class="icon"><use href="icons.svg#fw-mic"/></svg>
+
+<!-- or no extra request at all, and no path to resolve -->
+<link rel="stylesheet" href="icons.css">
+<i class="icon i-mic"></i>
+```
+
+The second form matters when the stylesheet is served from somewhere other than
+the page — a sprite path is resolved against the document, not the CSS, which is
+the usual way `<use>` quietly breaks.
+
+### Only what you use
+
+Lucide is 1,767 icons and 476 KB. Vendoring it whole would make the icon layer
+thirty times the size of the stylesheet it decorates, and `<use href="…#mic">`
+fetches the entire sprite to draw one glyph. So the full set lives in `vendor/`
+and never reaches a browser. What ships is whatever you name:
+
+```sh
+node scripts/build-icons.mjs mic chat mail   # → icons/ , 1.1 KB sprite
+npm run build:icons                          # the default set, 3.4 KB
+```
+
+The default set covers the components in this theme: `mic`, `keyboard`, `chat`,
+`phone`, `mail`, `post`, `globe`, `menu`, `close`, `check`, `chevron-down`,
+`search`, `external`, `alert`, `whatsapp`, `telegram`. Any
+[Lucide name](https://lucide.dev/icons) works as an argument; a few have
+friendlier aliases here (`chat` → `message-square`, `close` → `x`).
+
+### Artwork and licences
+
+Lucide (ISC, © Lucide Icons and Contributors), except the two brand marks,
+which are Tabler (MIT, © Paweł Kuna) — Lucide removed its brand icons over
+trademark concerns. Both licences travel in `vendor/`.
+
+Telegram and WhatsApp are trademarks. They are here to label a link to those
+services, which is ordinary nominative use; anything more prominent is your
+call to check.
+
 ## OG images
 
 An opinionated social card in the theme's language (accent bar, eyebrow, mono
