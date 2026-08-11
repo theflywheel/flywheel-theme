@@ -127,6 +127,56 @@ header to sort (asc → desc → off), type in the bar to filter, page controls
 appear when rows exceed `pageSize`. Global filter and pagination are hidden when
 not needed.
 
+## App vocabulary
+
+Everything above dresses a document. This section dresses an application, and
+came back from a public consultation that ran these on real phones.
+
+All of it sits on two token scales, so a re-tune moves everything together:
+
+| Token | Purpose |
+|---|---|
+| `--sp-1` … `--sp-6` | spacing, a 4px-based scale |
+| `--fs-eyebrow`, `--fs-hint`, `--fs-label`, `--fs-card` | type, fixed steps |
+| `--fs-question`, `--fs-title` | type, fluid via `clamp()` |
+| `--fw-on-accent` | text sitting on a filled accent, flips with the theme |
+
+**Controls.** `button.primary` (with `.big`, `.block`) and `button.ghost`, both
+52px minimum so a thumb can hit them. `textarea` and `input[type=text]` gain a
+border, radius and accent focus ring. Wrap fields in `.field`, label with
+`.q-label` and `.field-label`, and use `.consent-row` where someone is agreeing
+to something — its checkbox is deliberately larger than the default, because a
+mis-tap there is a consent problem rather than a layout one.
+
+**Choices.** `.option-grid` of `.opt-card`s, as primary navigation. An odd last
+card spans the row rather than leaving a hole. `.opt-card.is-soon` shows an
+option that exists but is not open yet — dimmed, not hidden, so people can see
+it is coming rather than wonder where it went.
+
+**Conversation.** `.chat-log` with `.bubble.bot` / `.bubble.me`; the flattened
+corner does the work an avatar would, for nothing. `.chat-input` pairs a
+textarea with a send button.
+
+**Pipeline trace.** `.trace` with `.trace-dot.done` / `.bad` and `pre.payload`,
+for showing work crossing a boundary — a submission going out and a verdict
+coming back — so a reader need not take an integration on trust.
+
+**Shell.** `.site-menu-btn` and `.site-menu-panel` (a fixed overlay mirroring
+the theme toggle, deliberately not a header bar), and `.site-footer` with
+`.footer-grid`.
+
+### Fitting a small screen
+
+Width is the axis everyone remembers; height is the one that breaks a phone.
+
+- `body.fold` makes the page a viewport-tall column so a footer lands *on* the
+  fold, with no height guessing. It sets `min-height` twice — `vh` first as the
+  fallback, then `dvh`, which is what survives mobile browser chrome.
+- `@media (max-height: 760px)` and `(max-height: 600px)` step the type scale
+  down and tighten gaps, for landscape handsets and small phones.
+- Touch targets meet 44px under `pointer: coarse`.
+- Base size drops from 13px to 16px under 640px.
+
 ## OG images
 
 An opinionated social card in the theme's language (accent bar, eyebrow, mono

@@ -15,6 +15,9 @@
   --fw-mut: #66706a;
   --fw-accent: #2f6f4f;
   --fw-accent-soft: #e6f0ea;
+  /* text on a filled accent: the accent is dark in light mode and light in
+   * dark mode, so anything sitting on it has to flip with it */
+  --fw-on-accent: #ffffff;
   --fw-line: #d8ded9;
   --fw-panel: #ffffff;
   --fw-code-bg: #f2f5f2;
@@ -39,11 +42,31 @@
    * Naming real fonts disables that quirk, so the size must be explicit. */
   --fw-size: 13px;
   --fw-measure: 46em;   /* reading width; override on app-like pages */
+
+  /* Spacing: a 4px-based scale. Margins picked from a scale sit together;
+   * margins picked one at a time drift, and the drift is what reads as
+   * amateurish long before anyone can name it. */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+
+  /* Type: a ~1.25 ratio, named by role rather than size, so a step can be
+   * retuned without every consumer renaming things. The last two are fluid:
+   * they are the ones that have to survive a 320px phone and a desktop. */
+  --fs-eyebrow: 0.72rem;                        /* context label            */
+  --fs-hint: 0.9rem;                            /* supporting detail        */
+  --fs-label: 1rem;                             /* controls                 */
+  --fs-card: 1.15rem;                           /* actions                  */
+  --fs-question: clamp(1.15rem, 4vw, 1.4rem);   /* the ask                  */
+  --fs-title: clamp(1.5rem, 5vw, 1.9rem);       /* identity                 */
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --fw-bg: #121513; --fw-ink: #e4e8e4; --fw-mut: #9aa49d;
-    --fw-accent: #7cc47f; --fw-accent-soft: #1d2b22; --fw-line: #2a312c;
+    --fw-accent: #7cc47f; --fw-accent-soft: #1d2b22; --fw-on-accent: #121513; --fw-line: #2a312c;
     --fw-panel: #181c19; --fw-code-bg: #1d221e;
     --fw-ok: #6fbf82; --fw-bad: #e07a8a;
     --fw-tok-key: #7cc47f; --fw-tok-str: #d99a8e; --fw-tok-num: #7aaede;
@@ -54,7 +77,7 @@
 }
 :root[data-theme="light"] {
   --fw-bg: #fbfcfa; --fw-ink: #1c201d; --fw-mut: #66706a;
-  --fw-accent: #2f6f4f; --fw-accent-soft: #e6f0ea; --fw-line: #d8ded9;
+  --fw-accent: #2f6f4f; --fw-accent-soft: #e6f0ea; --fw-on-accent: #ffffff; --fw-line: #d8ded9;
   --fw-panel: #ffffff; --fw-code-bg: #f2f5f2;
   --fw-ok: #1a7a37; --fw-bad: #b00020;
   --fw-tok-key: #2f6f4f; --fw-tok-str: #a23c2c; --fw-tok-num: #1c66b3;
@@ -64,7 +87,7 @@
 }
 :root[data-theme="dark"] {
   --fw-bg: #121513; --fw-ink: #e4e8e4; --fw-mut: #9aa49d;
-  --fw-accent: #7cc47f; --fw-accent-soft: #1d2b22; --fw-line: #2a312c;
+  --fw-accent: #7cc47f; --fw-accent-soft: #1d2b22; --fw-on-accent: #121513; --fw-line: #2a312c;
   --fw-panel: #181c19; --fw-code-bg: #1d221e;
   --fw-ok: #6fbf82; --fw-bad: #e07a8a;
   --fw-tok-key: #7cc47f; --fw-tok-str: #d99a8e; --fw-tok-num: #7aaede;
@@ -326,9 +349,223 @@ pre.mermaid svg text, pre.mermaid svg tspan, .mermaid svg text, .mermaid svg tsp
 .json .bool { color: var(--fw-tok-bool); }
 .json .null { color: var(--fw-tok-null); }
 
+/* ---------- application vocabulary ----------
+ * Everything above dresses a document. What follows dresses an application:
+ * forms people fill in, choices they tap, conversations they have, and the
+ * shell around all of it. Brought back from the Open Listening consultation,
+ * where each of these was built on the tokens above and survived contact with
+ * real respondents on real phones.
+ */
+
+/* --- controls --- */
+
+/* the affirmative action: one per screen, ideally */
+button.primary {
+  font: inherit;
+  font-size: var(--fs-card);
+  background: var(--fw-accent);
+  color: var(--fw-on-accent);
+  border: 1px solid var(--fw-accent);
+  border-radius: 10px;
+  padding: 0.85rem 1.5rem;
+  min-height: 52px;          /* thumbs, not cursors */
+  cursor: pointer;
+}
+button.primary:disabled { opacity: 0.5; cursor: not-allowed; }
+button.primary.big { font-size: 1.2rem; padding: 1rem 1.8rem; }
+button.primary.block { display: block; width: 100%; }
+
+/* everything else: same shape, no claim on attention */
+button.ghost {
+  font: inherit;
+  background: transparent;
+  color: var(--fw-ink);
+  border: 1px solid var(--fw-line);
+  border-radius: 10px;
+  padding: 0.85rem 1.5rem;
+  cursor: pointer;
+}
+
+textarea, input[type="text"] {
+  width: 100%;
+  font: inherit;
+  font-size: var(--fs-card);
+  color: var(--fw-ink);
+  background: var(--fw-panel);
+  border: 1px solid var(--fw-line);
+  border-radius: 10px;
+  padding: 0.5rem 0.6rem;
+}
+textarea:focus, input[type="text"]:focus { outline: 2px solid var(--fw-accent); outline-offset: -1px; }
+
+.field { margin-bottom: var(--sp-5); }
+.q-label { display: block; font-weight: 600; margin-bottom: var(--sp-1); }
+.field-label { display: block; font-size: var(--fs-hint); color: var(--fw-mut); margin-bottom: var(--sp-1); }
+.checkline { display: flex; gap: var(--sp-2); align-items: flex-start; margin-bottom: var(--sp-3); }
+
+/* a checkbox someone is agreeing to something with: bigger than the default,
+ * because a mis-tap here is a consent problem and not a layout one */
+.consent-row { display: flex; gap: var(--sp-3); align-items: flex-start; margin: var(--sp-4) 0; line-height: 1.5; }
+.consent-row input { margin-top: var(--sp-1); width: 1.25rem; height: 1.25rem; flex: none; }
+
+.err { color: var(--fw-bad); margin-top: var(--sp-4); }
+
+/* --- choice grid: large tappable cards, used as primary navigation --- */
+.option-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+  grid-auto-rows: minmax(64px, 80px);
+}
+.opt-card {
+  display: flex; flex-direction: row; align-items: center; justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3); border-radius: 12px; min-height: 64px; height: 100%;
+  border: 1.5px solid var(--fw-line); background: var(--fw-panel); color: var(--fw-ink);
+  text-decoration: none; font: inherit; font-size: var(--fs-card); font-weight: 600;
+  cursor: pointer;
+}
+.opt-card:hover, .opt-card:focus-visible { border-color: var(--fw-accent); background: var(--fw-accent-soft); }
+.opt-card svg { flex: none; }
+/* an option that exists but is not open yet: dimmed, not hidden, so people can
+ * see it is coming rather than wonder where it went */
+.opt-card.is-soon { opacity: 0.55; cursor: default; border-style: dashed; }
+.opt-card.is-soon:hover { border-color: var(--fw-line); background: var(--fw-panel); }
+.soon-note { display: block; font-size: 0.7rem; font-weight: 400; color: var(--fw-mut); line-height: 1.2; }
+/* an odd last card spans the row rather than leaving a hole beside it */
+.option-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+/* --- chat --- */
+.chat-log { display: flex; flex-direction: column; gap: var(--sp-2); max-height: 55vh; overflow-y: auto; margin: var(--sp-4) 0; }
+.bubble {
+  max-width: 85%; padding: var(--sp-3); border-radius: 14px;
+  line-height: 1.5; white-space: pre-wrap; font-size: var(--fs-label);
+}
+/* the flattened corner does the work an avatar would, for nothing */
+.bubble.bot { background: var(--fw-panel); border: 1px solid var(--fw-line); align-self: flex-start; border-bottom-left-radius: 4px; }
+.bubble.me { background: var(--fw-accent-soft); border: 1px solid var(--fw-accent); align-self: flex-end; border-bottom-right-radius: 4px; }
+.bubble.typing { color: var(--fw-mut); font-style: italic; }
+.chat-input { display: flex; gap: var(--sp-2); align-items: flex-end; }
+.chat-input textarea { flex: 1; min-width: 0; resize: none; font-size: var(--fs-label); }
+
+/* --- pipeline trace: a step list that shows its working ---
+ * Built to show a submission crossing an API boundary and coming back with a
+ * verdict, so an audience does not have to take the integration on trust. */
+.trace { border: 1px solid var(--fw-line); border-radius: 4px; margin-top: var(--sp-4); }
+.trace-step { display: flex; gap: var(--sp-3); padding: 0.6rem var(--sp-3); border-bottom: 1px solid var(--fw-line); align-items: baseline; }
+.trace-step:last-child { border-bottom: 0; }
+.trace-dot { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--fw-mut); flex: none; }
+.trace-dot.done { background: var(--fw-ok); }
+.trace-dot.bad { background: var(--fw-bad); }
+.trace-body { flex: 1; min-width: 0; }  /* or a wide payload widens the page instead of scrolling */
+pre.payload {
+  background: var(--fw-code-bg); border: 1px solid var(--fw-line); border-radius: 3px;
+  padding: 0.6rem; overflow-x: auto; font-size: 0.9em; margin: var(--sp-1) 0 0;
+}
+
+/* --- shell: menu and footer ---
+ * The menu is a fixed overlay mirroring the theme toggle, deliberately not a
+ * header bar: a page sized to fit one fold stays that way. */
+.site-menu-btn {
+  position: fixed; top: 0.9em; left: 0.9em; z-index: 40;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; padding: 0; cursor: pointer;
+  border: 1px solid var(--fw-line); border-radius: 10px;
+  background: var(--fw-panel); color: var(--fw-ink);
+}
+.site-menu-btn:hover, .site-menu-btn:focus-visible { border-color: var(--fw-accent); }
+/* state on the closed button, so it is visible without opening the menu */
+.site-menu-dot {
+  position: absolute; top: 5px; right: 5px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--fw-ok); border: 1.5px solid var(--fw-panel);
+}
+.site-menu-panel {
+  position: fixed; top: calc(0.9em + 44px); left: 0.9em; z-index: 40;
+  min-width: 15rem; max-width: calc(100vw - 1.8em);
+  display: flex; flex-direction: column;
+  padding: var(--sp-2); gap: 2px;
+  border: 1px solid var(--fw-line); border-radius: 12px;
+  background: var(--fw-panel);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+.site-menu-panel a {
+  padding: var(--sp-2) var(--sp-3); border-radius: 8px;
+  color: var(--fw-ink); text-decoration: none; border-bottom: 0;
+  font-size: var(--fs-label);
+}
+.site-menu-panel a:hover, .site-menu-panel a:focus-visible { background: var(--fw-accent-soft); color: var(--fw-accent); }
+
+.site-footer { width: 100%; margin: var(--sp-5) auto 0; padding: var(--sp-3) 0 0; border-top: 1px solid var(--fw-line); }
+.footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-1) var(--sp-4); }
+.footer-grid a {
+  font-size: 0.75rem; white-space: nowrap; color: var(--fw-mut);
+  text-decoration: none; border-bottom: none; padding: var(--sp-1) 0;
+}
+.footer-grid a:hover, .footer-grid a:focus-visible { color: var(--fw-accent); }
+
 /* page-width variants: <body class="wide"> for app-like pages */
 body.wide { max-width: 68em; }
 body.brief { max-width: 76em; }
+
+/* ---------- fitting a small screen ----------
+ * Width is the responsive axis everyone remembers. Height is the one that
+ * actually breaks a phone layout: a landscape handset, or a portrait one with
+ * the browser chrome showing, has far less vertical room than the design
+ * assumed, and the thing that falls off the bottom is usually the thing the
+ * page existed for.
+ */
+
+/* Padding inside the box, so it cannot push a sized element wider than its
+ * track. Scoped to the app vocabulary rather than global, so it cannot change
+ * how an existing document lays out. */
+.option-grid, .option-grid *, .opt-card, .opt-card *,
+.chat-input, .chat-input *, .site-menu-panel, .site-menu-panel *,
+.site-footer, .site-footer * { box-sizing: border-box; }
+
+/* One fold, no height guessing: the body becomes a viewport-tall column and
+ * the main element absorbs whatever is spare, so a footer lands on the fold
+ * instead of just below it. dvh is repeated after vh deliberately — vh is the
+ * fallback for browsers that do not know dvh, and dvh is what survives mobile
+ * browser chrome appearing and disappearing. */
+body.fold {
+  display: flex; flex-direction: column;
+  min-height: calc(100vh - 3em);
+  min-height: calc(100dvh - 3em);
+}
+body.fold > main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+@media (max-width: 640px) {
+  :root { --fw-size: 16px; }
+}
+
+/* Short screens: step the scale down a tier and tighten the gaps, so the page
+ * still fits without scrolling. */
+@media (max-height: 760px) {
+  :root {
+    --fs-title: 1.35rem;
+    --fs-question: 1.08rem;
+  }
+  .option-grid { gap: var(--sp-2); grid-auto-rows: minmax(48px, 60px); }
+  .opt-card { min-height: 46px; font-size: 1rem; padding: var(--sp-2) var(--sp-3); }
+  .opt-card svg { width: 20px; height: 20px; }
+  .site-footer { margin-top: var(--sp-3); padding-top: var(--sp-2); }
+  .footer-grid a { padding: 0; }
+}
+
+/* Very short screens — an original iPhone SE, or any handset in landscape.
+ * A last squeeze of the whitespace rather than the content. */
+@media (max-height: 600px) {
+  .option-grid { grid-auto-rows: minmax(44px, 52px); }
+}
+
+/* Touch targets. The pointer:coarse rule above raises padding on inherited
+ * controls; these are the app controls, and 44px is the floor worth meeting. */
+@media (pointer: coarse) {
+  .opt-card { min-height: 64px; }
+  .site-menu-btn { width: 44px; height: 44px; }
+  .footer-grid a { padding: var(--sp-2) 0; }
+}
 
 @media (prefers-reduced-motion: no-preference) {
   a, button { transition: border-color 120ms ease; }
