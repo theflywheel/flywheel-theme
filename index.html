@@ -16,6 +16,7 @@
 <meta name="twitter:image" content="https://theflywheel.github.io/flywheel-theme/og/og.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='2' fill='%232f6f4f'/></svg>">
 <link rel="stylesheet" href="flywheel.css">
+<link rel="stylesheet" href="icons.css">
 </head>
 <body class="wide">
 
@@ -168,11 +169,11 @@ that ran these on real phones. All of it sits on the spacing and type tokens
 <h3>Choices</h3>
 <p class="sub">Large tap targets as primary navigation. An odd last card spans the row.</p>
 <div class="option-grid">
-  <a class="opt-card" href="#app">Speak</a>
-  <a class="opt-card" href="#app">Chat</a>
-  <a class="opt-card" href="#app">WhatsApp</a>
-  <span class="opt-card is-soon" aria-disabled="true"><span>Email<small class="soon-note">coming soon</small></span></span>
-  <a class="opt-card" href="#app">Post</a>
+  <a class="opt-card" href="#app"><i class="icon i-mic"></i>Speak</a>
+  <a class="opt-card" href="#app"><i class="icon i-chat"></i>Chat</a>
+  <a class="opt-card" href="#app"><i class="icon i-whatsapp"></i>WhatsApp</a>
+  <span class="opt-card is-soon" aria-disabled="true"><i class="icon i-mail"></i><span>Email<small class="soon-note">coming soon</small></span></span>
+  <a class="opt-card" href="#app"><i class="icon i-post"></i>Post</a>
 </div>
 
 <h3>Form</h3>
@@ -214,6 +215,19 @@ that ran these on real phones. All of it sits on the spacing and type tokens
     <a href="#app">Privacy Policy</a><a href="#app">Terms &amp; Conditions</a>
   </nav>
 </div>
+
+<h3>Icons</h3>
+<p class="sub">Sixteen by default, in <code>currentColor</code>. Build a smaller set with
+<code>node scripts/build-icons.mjs mic chat mail</code> — the full Lucide sprite stays in
+<code>vendor/</code> and never reaches a browser.</p>
+<p style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;font-size:1.4rem">
+  <i class="icon i-mic"></i><i class="icon i-keyboard"></i><i class="icon i-chat"></i>
+  <i class="icon i-phone"></i><i class="icon i-mail"></i><i class="icon i-post"></i>
+  <i class="icon i-globe"></i><i class="icon i-whatsapp"></i><i class="icon i-telegram"></i>
+  <i class="icon i-menu"></i><i class="icon i-close"></i><i class="icon i-check"></i>
+  <i class="icon i-chevron-down"></i><i class="icon i-search"></i><i class="icon i-external"></i>
+  <i class="icon i-alert"></i>
+</p>
 
 <h2 id="datatable">Data table</h2>
 <p class="sub">headless <a href="https://tanstack.com/table/latest/docs/api/core/table">@tanstack/table-core</a>

@@ -4,11 +4,13 @@
   "description": "Mono/green, markdown-first CSS theme \u2014 paper ground, deep-green accent, hairline borders. One stylesheet, no build.",
   "keywords": [
     "css",
-    "theme",
+    "design-system",
+    "icons",
     "markdown",
     "monospace",
-    "design-system",
-    "stylesheet"
+    "stylesheet",
+    "svg-sprite",
+    "theme"
   ],
   "homepage": "https://theflywheel.github.io/flywheel-theme/",
   "repository": {
@@ -27,7 +29,9 @@
     "./autogrow.js": "./autogrow.js",
     "./hljson.js": "./hljson.js",
     "./datatable.js": "./datatable.js",
-    "./vendor/table-core.mjs": "./vendor/table-core.mjs"
+    "./vendor/table-core.mjs": "./vendor/table-core.mjs",
+    "./icons.css": "./icons.css",
+    "./icons.svg": "./icons.svg"
   },
   "files": [
     "flywheel.css",
@@ -42,12 +46,18 @@
     "README.md",
     "LICENSE",
     "datatable.js",
-    "vendor/"
+    "vendor/",
+    "icons.css",
+    "icons.svg",
+    "scripts/"
   ],
   "sideEffects": [
     "*.js"
   ],
   "dependencies": {
     "@tanstack/table-core": "^8.21.3"
+  },
+  "scripts": {
+    "build:icons": "node scripts/build-icons.mjs"
   }
 }
