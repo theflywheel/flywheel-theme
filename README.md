@@ -161,6 +161,25 @@ textarea with a send button.
 for showing work crossing a boundary — a submission going out and a verdict
 coming back — so a reader need not take an integration on trust.
 
+**Sidebar.** `.with-sidebar` wraps a `.sidebar` and a `<main>`. Sticky column on
+a wide screen, a `<details>` disclosure on a narrow one, and no JavaScript in
+either — CSS reveals the closed disclosure above 60em, so the markup carries no
+`open` attribute and a phone gets the collapsed state for free.
+
+```html
+<div class="with-sidebar">
+  <details class="sidebar">
+    <summary>Contents</summary>
+    <nav>
+      <p class="side-label">Basics</p>
+      <a href="#type" class="is-current">Typography</a>
+      <a href="#color">Colour</a>
+    </nav>
+  </details>
+  <main>…</main>
+</div>
+```
+
 **Shell.** `.site-menu-btn` and `.site-menu-panel` (a fixed overlay mirroring
 the theme toggle, deliberately not a header bar), and `.site-footer` with
 `.footer-grid`.

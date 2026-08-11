@@ -492,6 +492,84 @@ pre.payload {
   padding: 0.6rem; overflow-x: auto; font-size: 0.9em; margin: var(--sp-1) 0 0;
 }
 
+/* --- sidebar ---
+ * For a site with more destinations than a top nav can carry. Sticky on a
+ * wide screen so navigation stays put while the content scrolls; collapsed
+ * behind a disclosure on a narrow one, where a permanent column would cost
+ * half the width.
+ *
+ * No JavaScript: position:sticky does the desktop case and <details> does the
+ * mobile one.
+ *
+ *   <div class="with-sidebar">
+ *     <details class="sidebar" open>
+ *       <summary>Contents</summary>
+ *       <nav>
+ *         <p class="side-label">Basics</p>
+ *         <a href="#type" class="is-current">Typography</a>
+ *         <a href="#color">Colour</a>
+ *       </nav>
+ *     </details>
+ *     <main>…</main>
+ *   </div>
+ */
+.with-sidebar { display: block; }
+
+.sidebar { margin-bottom: var(--sp-5); }
+.sidebar > summary {
+  cursor: pointer; list-style: none;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--fw-line); border-radius: var(--ctl-radius);
+  background: var(--fw-panel); color: var(--fw-ink);
+  font-size: var(--fs-label); min-height: var(--ctl-min-h);
+}
+.sidebar > summary::-webkit-details-marker { display: none; }
+.sidebar > summary::after { content: "▾"; color: var(--fw-mut); transition: none; }
+.sidebar[open] > summary::after { content: "▴"; }
+.sidebar > summary:hover, .sidebar > summary:focus-visible { border-color: var(--fw-accent); }
+
+.sidebar nav { display: flex; flex-direction: column; gap: 1px; padding: var(--sp-2) 0; }
+/* Setting display on the child of a closed <details> overrides the browser's
+ * own hiding of it, so the closed state has to be restored explicitly. */
+.sidebar:not([open]) > nav { display: none; }
+.sidebar nav a {
+  padding: var(--sp-2) var(--sp-3); border-radius: 6px; border-bottom: 0;
+  color: var(--fw-mut); text-decoration: none; font-size: var(--fs-label);
+  /* The rail reads as a track the current item sits on, rather than a border
+   * that appears from nowhere when something is selected. */
+  border-left: 2px solid transparent;
+}
+.sidebar nav a:hover, .sidebar nav a:focus-visible { color: var(--fw-ink); background: var(--fw-accent-soft); }
+.sidebar nav a.is-current { color: var(--fw-accent); border-left-color: var(--fw-accent); font-weight: 600; }
+
+.side-label {
+  margin: var(--sp-3) 0 var(--sp-1); padding: 0 var(--sp-3);
+  font-size: var(--fs-eyebrow); letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--fw-mut);
+}
+.side-label:first-child { margin-top: 0; }
+
+/* Wide enough for a column that does not crowd the reading measure. */
+@media (min-width: 60em) {
+  .with-sidebar {
+    display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: var(--sp-6);
+    align-items: start;
+  }
+  .sidebar {
+    position: sticky; top: var(--sp-4); margin-bottom: 0;
+    max-height: calc(100vh - 2rem); max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
+  }
+  /* Always open on desktop, and the toggle has nothing left to say. Revealing
+   * a closed <details> from CSS means the markup needs no `open` attribute,
+   * so the same page is collapsed on a phone — where a permanent list would
+   * push the content off the screen — without any JavaScript deciding. */
+  .sidebar > summary { display: none; }
+  .sidebar:not([open]) > nav { display: flex; }
+  .sidebar nav { padding: 0; }
+}
+
 /* --- shell: menu and footer ---
  * The menu is a fixed overlay mirroring the theme toggle, deliberately not a
  * header bar: a page sized to fit one fold stays that way. */
