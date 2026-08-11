@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>flywheel-theme</title>
-<meta name="description" content="Markdown-first mono/green theme: type system, terminals, diagrams, light and dark.">
+<meta name="description" content="Component catalogue for flywheel-theme — every piece, with a live example and the markup to copy.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Everything on this page is the theme">
+<meta property="og:title" content="flywheel-theme — component catalogue">
 <meta property="og:description" content="Markdown-first mono/green theme: type system, terminals, diagrams, light and dark.">
 <meta property="og:url" content="https://theflywheel.github.io/flywheel-theme/">
 <meta property="og:image" content="https://theflywheel.github.io/flywheel-theme/og/og.png">
@@ -17,36 +17,164 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='2' fill='%232f6f4f'/></svg>">
 <link rel="stylesheet" href="flywheel.css">
 <link rel="stylesheet" href="icons.css">
+<style>
+/* Catalogue scaffolding — page-local, not part of the theme. */
+.page-head { border-bottom: 1px solid var(--fw-line); padding-bottom: var(--sp-4); margin-bottom: var(--sp-5); }
+.entry { border-top: 1px solid var(--fw-line); padding-top: var(--sp-4); margin-top: var(--sp-5); scroll-margin-top: var(--sp-4); }
+.entry > h3 { margin-top: 0; }
+.entry > .sub:first-of-type { margin-top: -0.4em; }
+.src { margin-top: var(--sp-3); }
+.src > summary { cursor: pointer; color: var(--fw-mut); font-size: var(--fs-hint); }
+.src > summary:hover { color: var(--fw-accent); }
+.swatches { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3); }
+.sw { width: 1.4em; height: 1.4em; border-radius: 4px; border: 1px solid var(--fw-line); display: inline-block; }
+.spacers { display: flex; align-items: flex-end; gap: var(--sp-2); }
+.spacers span { height: 1.6em; background: var(--fw-accent-soft); border: 1px solid var(--fw-accent); display: inline-block; }
+.icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: var(--sp-2); }
+.icon-chip { display: flex; align-items: center; gap: var(--sp-2); color: var(--fw-mut); }
+.icon-chip code { font-size: 0.8em; }
+</style>
 </head>
 <body class="wide">
 
-<nav><a href="#article">Article</a> <a href="#markdown">Markdown</a> <a href="#components">Components</a> <a href="#app">App</a>
-<a href="#controls">Controls</a>
-<a href="https://github.com/theflywheel/flywheel-theme">GitHub</a></nav>
+<body class="wide">
+
+<header class="page-head">
+  <p class="eyebrow">flywheel-theme</p>
+  <h1>Component catalogue</h1>
+  <p class="sub">Every piece of the theme, with a live example and the markup to copy.
+  One stylesheet, no build · <a href="https://github.com/theflywheel/flywheel-theme#readme">README</a>
+  · <a href="https://github.com/theflywheel/flywheel-theme">GitHub</a></p>
+</header>
+
+<div class="with-sidebar">
+<details class="sidebar">
+<summary>Contents</summary>
+<nav>
+<p class="side-label">Foundations</p>
+<a href="#tokens">Colour &amp; type</a>
+<a href="#spacing">Spacing</a>
+<a href="#icons">Icons</a>
+<p class="side-label">Text</p>
+<a href="#labels">Labels &amp; chips</a>
+<a href="#prose">Prose</a>
+<a href="#article">A post, rendered</a>
+<p class="side-label">Layout</p>
+<a href="#cards">Cards &amp; grids</a>
+<a href="#sidebar">Sidebar</a>
+<a href="#shell">Menu &amp; footer</a>
+<p class="side-label">Controls</p>
+<a href="#controls">Buttons &amp; inputs</a>
+<a href="#forms">Fields</a>
+<a href="#search">Search bar</a>
+<p class="side-label">Application</p>
+<a href="#choices">Choice grid</a>
+<a href="#chat">Conversation</a>
+<a href="#trace">Pipeline trace</a>
+<p class="side-label">Data</p>
+<a href="#table">Data table</a>
+<a href="#code">Code &amp; JSON</a>
+<a href="#diagram">Diagrams</a>
+</nav>
+</details>
 
 <main>
-<p class="eyebrow">flywheel-theme</p>
-<h1>Everything on this page is the theme</h1>
-<p class="sub">One stylesheet · <a href="https://github.com/theflywheel/flywheel-theme#readme">README</a> for usage and exact values</p>
 
-<h2 id="article">A post, as it would render</h2>
-<div class="card">
-  <p class="eyebrow">field notes · registries</p>
-  <h1 style="margin:.2em 0">Why the registry is the interesting part</h1>
-  <p class="thesis">Every network has a phone book. The question is who gets to edit it,
-  and whether anyone can prove they cheated.</p>
-  <h2>The operator is the attack surface</h2>
-  <p>When two parties exchange signed messages, the receiver&rsquo;s real question is not
-  <em>is this signature valid</em> but <em>whose key am I checking it against</em>. That answer
-  comes from a registry &mdash; which makes the registry operator the one party worth compromising.</p>
-  <h3>What transparency actually buys</h3>
-  <p>An append-only log doesn&rsquo;t stop the operator from lying. It makes the lie
-  <strong>provable</strong> &mdash; which, for institutions, is the property that matters.</p>
-  <p class="sub">Published 2026-07-23 · 6 min read · part of the DeDi notes · <button type="button" class="share-btn">share</button></p>
+<p class="side-label">Foundations</p>
+
+<section class="entry" id="tokens">
+<h3>Colour &amp; type</h3>
+<p class="sub">Ten colour tokens and six type steps. Everything else is built from these, so a re-skin is a variable change.</p>
+<div class="swatches">
+  <span class="sw" style="background:var(--fw-accent)"></span><code>--fw-accent</code>
+  <span class="sw" style="background:var(--fw-accent-soft)"></span><code>--fw-accent-soft</code>
+  <span class="sw" style="background:var(--fw-panel)"></span><code>--fw-panel</code>
+  <span class="sw" style="background:var(--fw-line)"></span><code>--fw-line</code>
+  <span class="sw" style="background:var(--fw-ok)"></span><code>--fw-ok</code>
+  <span class="sw" style="background:var(--fw-bad)"></span><code>--fw-bad</code>
+</div>
+<p style="font-size:var(--fs-title);line-height:1.15;margin:.6em 0 0">Title · --fs-title</p>
+<p style="font-size:var(--fs-question);margin:.2em 0">Question · --fs-question</p>
+<p style="font-size:var(--fs-card);margin:.2em 0">Card · --fs-card</p>
+<p style="font-size:var(--fs-label);margin:.2em 0">Label · --fs-label</p>
+<p style="font-size:var(--fs-hint);color:var(--fw-mut);margin:.2em 0">Hint · --fs-hint</p>
+<p class="eyebrow" style="margin:.2em 0">Eyebrow · --fs-eyebrow</p>
+</section>
+
+<section class="entry" id="spacing">
+<h3>Spacing</h3>
+<p class="sub">A 4px scale, <code>--sp-1</code> to <code>--sp-6</code>. Margins picked from a scale sit together; margins picked one at a time drift.</p>
+<div class="spacers">
+  <span style="width:var(--sp-1)"></span><span style="width:var(--sp-2)"></span><span style="width:var(--sp-3)"></span>
+  <span style="width:var(--sp-4)"></span><span style="width:var(--sp-5)"></span><span style="width:var(--sp-6)"></span>
+</div>
+</section>
+
+<section class="entry" id="icons">
+<h3>Icons</h3>
+<p class="sub">Sixteen by default, in <code>currentColor</code>. The full Lucide set stays in <code>vendor/</code> and never reaches a browser.</p>
+<div class="icon-grid">
+  <span class="icon-chip"><i class="icon i-mic"></i><code>i-mic</code></span>
+  <span class="icon-chip"><i class="icon i-keyboard"></i><code>i-keyboard</code></span>
+  <span class="icon-chip"><i class="icon i-chat"></i><code>i-chat</code></span>
+  <span class="icon-chip"><i class="icon i-phone"></i><code>i-phone</code></span>
+  <span class="icon-chip"><i class="icon i-mail"></i><code>i-mail</code></span>
+  <span class="icon-chip"><i class="icon i-post"></i><code>i-post</code></span>
+  <span class="icon-chip"><i class="icon i-globe"></i><code>i-globe</code></span>
+  <span class="icon-chip"><i class="icon i-whatsapp"></i><code>i-whatsapp</code></span>
+  <span class="icon-chip"><i class="icon i-telegram"></i><code>i-telegram</code></span>
+  <span class="icon-chip"><i class="icon i-menu"></i><code>i-menu</code></span>
+  <span class="icon-chip"><i class="icon i-close"></i><code>i-close</code></span>
+  <span class="icon-chip"><i class="icon i-check"></i><code>i-check</code></span>
+  <span class="icon-chip"><i class="icon i-chevron-down"></i><code>i-chevron-down</code></span>
+  <span class="icon-chip"><i class="icon i-search"></i><code>i-search</code></span>
+  <span class="icon-chip"><i class="icon i-external"></i><code>i-external</code></span>
+  <span class="icon-chip"><i class="icon i-alert"></i><code>i-alert</code></span>
+</div>
+<p class="sub"><code>node scripts/build-icons.mjs mic chat mail</code> → a 1.1 KB subset</p>
+<details class="src"><summary>markup</summary>
+<pre><code>&lt;svg class="icon"&gt;&lt;use href="icons.svg#fw-mic"/&gt;&lt;/svg&gt;
+&lt;i class="icon i-mic"&gt;&lt;/i&gt;</code></pre>
+</details>
+</section>
+
+<p class="side-label">Text</p>
+
+<section class="entry" id="labels">
+<h3>Labels &amp; chips</h3>
+<p class="sub">Badges for versions, tags for taxonomy, status words for outcomes.</p>
+<p><span class="badge">Beckn 2.0.0</span> <span class="tag">pension</span> <span class="tag">widow</span>
+<span class="tag">bihar</span> · <span class="ok">verified</span> · <span class="no">rejected</span></p>
+
+<div class="grid">
+  <div class="card">
+    <h3>Standalone</h3>
+    <p class="mut">One binary, one Postgres. The log, checkpoints, and in-browser verification are always on.</p>
+  </div>
+  <div class="card">
+    <h3>Witnessed</h3>
+    <p class="mut">A second operator continuously demands consistency proofs and records verdicts.</p>
+  </div>
+  <div class="card">
+    <h3>Anchored</h3>
+    <p class="mut">Checkpoint roots pinned into an external ledger the operator does not control.</p>
+  </div>
 </div>
 
-<h2 id="markdown">Markdown</h2>
+<div class="proof" style="margin-top:1.2em">
+  <p class="ok" style="margin:.2em 0"><b>verified against the signed tree</b></p>
+  <ul style="margin:.2em 0">
+    <li class="ok">leaf 4 is included in the tree of size 17</li>
+    <li class="ok">checkpoint signed by dedi.proto.theflywheel.in</li>
+  </ul>
+</div>
 
+<pre id="jsondemo" class="json" style="margin-top:1.2em"></pre>
+</section>
+
+<section class="entry" id="prose">
+<h3>Prose</h3>
+<p class="sub">Headings, lists, quotes, tables — the markdown elements, styled without classes.</p>
 <p>A paragraph with a <a href="#">link</a>, some <strong>bold</strong>, an <em>emphasis</em>,
 and <code>inline code</code>.</p>
 
@@ -117,39 +245,101 @@ sequenceDiagram
 </table>
 
 <hr>
+</section>
 
-<h2 id="components">Components</h2>
+<section class="entry" id="article">
+<h3>A post, rendered</h3>
+<p class="sub">The prose styling doing real work, rather than as a specimen.</p>
+<div class="card">
+  <p class="eyebrow">field notes · registries</p>
+  <h1 style="margin:.2em 0">Why the registry is the interesting part</h1>
+  <p class="thesis">Every network has a phone book. The question is who gets to edit it,
+  and whether anyone can prove they cheated.</p>
+  <h2>The operator is the attack surface</h2>
+  <p>When two parties exchange signed messages, the receiver&rsquo;s real question is not
+  <em>is this signature valid</em> but <em>whose key am I checking it against</em>. That answer
+  comes from a registry &mdash; which makes the registry operator the one party worth compromising.</p>
+  <h3>What transparency actually buys</h3>
+  <p>An append-only log doesn&rsquo;t stop the operator from lying. It makes the lie
+  <strong>provable</strong> &mdash; which, for institutions, is the property that matters.</p>
+  <p class="sub">Published 2026-07-23 · 6 min read · part of the DeDi notes · <button type="button" class="share-btn">share</button></p>
+</div>
+</section>
 
-<p><span class="badge">Beckn 2.0.0</span> <span class="tag">pension</span> <span class="tag">widow</span>
-<span class="tag">bihar</span> · <span class="ok">verified</span> · <span class="no">rejected</span></p>
+<p class="side-label">Layout</p>
 
+<section class="entry" id="cards">
+<h3>Cards &amp; grids</h3>
+<p class="sub">A bordered box, and two grids: <code>.grid</code> auto-fits, <code>.cols2</code> is a fixed pair.</p>
 <div class="grid">
-  <div class="card">
-    <h3>Standalone</h3>
-    <p class="mut">One binary, one Postgres. The log, checkpoints, and in-browser verification are always on.</p>
-  </div>
-  <div class="card">
-    <h3>Witnessed</h3>
-    <p class="mut">A second operator continuously demands consistency proofs and records verdicts.</p>
-  </div>
-  <div class="card">
-    <h3>Anchored</h3>
-    <p class="mut">Checkpoint roots pinned into an external ledger the operator does not control.</p>
-  </div>
+  <div class="card"><h3>Card</h3><p class="sub">A bordered box. Its first and last children lose their outer margins, so it never looks padded twice.</p></div>
+  <div class="card"><h3>Another</h3><p class="sub">The grid auto-fits at 19rem, so this wraps on its own.</p></div>
 </div>
+<details class="src"><summary>markup</summary>
+<pre><code>&lt;div class="grid"&gt;&lt;div class="card"&gt;…&lt;/div&gt;&lt;/div&gt;</code></pre>
+</details>
+</section>
 
-<div class="proof" style="margin-top:1.2em">
-  <p class="ok" style="margin:.2em 0"><b>verified against the signed tree</b></p>
-  <ul style="margin:.2em 0">
-    <li class="ok">leaf 4 is included in the tree of size 17</li>
-    <li class="ok">checkpoint signed by dedi.proto.theflywheel.in</li>
-  </ul>
+<section class="entry" id="sidebar">
+<h3>Sidebar</h3>
+<p class="sub">For a site with more destinations than a top nav carries. Sticky on a wide screen, a disclosure on a narrow one, no JavaScript — the column to the left is this component.</p>
+<p class="sub">Narrow the window past 60em to watch it collapse.</p>
+<details class="src"><summary>markup</summary>
+<pre><code>&lt;div class="with-sidebar"&gt;
+  &lt;details class="sidebar" open&gt;
+    &lt;summary&gt;Contents&lt;/summary&gt;
+    &lt;nav&gt;
+      &lt;p class="side-label"&gt;Basics&lt;/p&gt;
+      &lt;a href="#type" class="is-current"&gt;Typography&lt;/a&gt;
+      &lt;a href="#color"&gt;Colour&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/details&gt;
+  &lt;main&gt;…&lt;/main&gt;
+&lt;/div&gt;</code></pre>
+</details>
+</section>
+
+<section class="entry" id="shell">
+<h3>Menu &amp; footer</h3>
+<p class="sub">A fixed overlay menu that steals no vertical space, and a small footer grid.</p>
+<div class="site-footer" style="margin-top:0">
+  <nav class="footer-grid">
+    <a href="#shell">Architecture</a><a href="#shell">About</a>
+    <a href="#shell">Privacy Policy</a><a href="#shell">Terms &amp; Conditions</a>
+  </nav>
 </div>
+</section>
 
-<pre id="jsondemo" class="json" style="margin-top:1.2em"></pre>
+<p class="side-label">Controls</p>
 
-<h2 id="controls">Controls</h2>
+<section class="entry" id="controls">
+<h3>Buttons &amp; inputs</h3>
+<p class="sub">Sized through tokens that follow the pointer: compact for a mouse, 52px for a fingertip.</p>
+<p><button type="button" class="primary">Submit</button> <button type="button" class="ghost">Back</button>
+<button type="button" class="primary big">Big</button></p>
+<textarea rows="2" placeholder="type here" spellcheck="false"></textarea>
+<details class="src"><summary>markup</summary>
+<pre><code>&lt;button class="primary"&gt;Submit&lt;/button&gt;
+&lt;button class="ghost"&gt;Back&lt;/button&gt;</code></pre>
+</details>
+</section>
 
+<section class="entry" id="forms">
+<h3>Fields</h3>
+<p class="sub">A labelled field, a hint, and a consent row whose checkbox is deliberately larger than the default.</p>
+<div class="field">
+  <label class="q-label" for="cat-a">What would you change?</label>
+  <span class="field-label">One suggestion is plenty.</span>
+  <textarea id="cat-a" rows="2" spellcheck="false"></textarea>
+</div>
+<div class="consent-row"><input type="checkbox" id="cat-c">
+<label for="cat-c">This may be used for the consultation.</label></div>
+<p class="err">Please choose at least one option.</p>
+</section>
+
+<section class="entry" id="search">
+<h3>Search bar</h3>
+<p class="sub">An input, a mode select and a button on one row, wrapping on narrow screens.</p>
 <div class="searchbar">
   <input type="text" placeholder="widow pension" aria-label="search query" spellcheck="false">
   <select aria-label="search mode"><option>mistral-3b</option><option>fuzzy/text</option><option>mistral-8b</option></select>
@@ -160,35 +350,25 @@ sequenceDiagram
   <textarea class="autogrow" rows="1" placeholder="or describe your situation in a few lines" aria-label="describe your situation" spellcheck="false" oninput="autogrow(this)"></textarea>
   <button type="button">AI search</button>
 </div>
+</section>
 
-<h2 id="app">App vocabulary</h2>
-<p class="sub">Forms, choices, conversation and shell. Brought back from a public consultation
-that ran these on real phones. All of it sits on the spacing and type tokens
-(<code>--sp-*</code>, <code>--fs-*</code>), so a re-tune moves everything together.</p>
+<p class="side-label">Application</p>
 
-<h3>Choices</h3>
-<p class="sub">Large tap targets as primary navigation. An odd last card spans the row.</p>
+<section class="entry" id="choices">
+<h3>Choice grid</h3>
+<p class="sub">Large tappable cards as primary navigation. An odd last card spans the row.</p>
 <div class="option-grid">
-  <a class="opt-card" href="#app"><i class="icon i-mic"></i>Speak</a>
-  <a class="opt-card" href="#app"><i class="icon i-chat"></i>Chat</a>
-  <a class="opt-card" href="#app"><i class="icon i-whatsapp"></i>WhatsApp</a>
+  <a class="opt-card" href="#choices"><i class="icon i-mic"></i>Speak</a>
+  <a class="opt-card" href="#choices"><i class="icon i-chat"></i>Chat</a>
+  <a class="opt-card" href="#choices"><i class="icon i-whatsapp"></i>WhatsApp</a>
   <span class="opt-card is-soon" aria-disabled="true"><i class="icon i-mail"></i><span>Email<small class="soon-note">coming soon</small></span></span>
-  <a class="opt-card" href="#app"><i class="icon i-post"></i>Post</a>
+  <a class="opt-card" href="#choices"><i class="icon i-post"></i>Post</a>
 </div>
+</section>
 
-<h3>Form</h3>
-<div class="field">
-  <label class="q-label" for="demo-a">What would you change?</label>
-  <span class="field-label">One suggestion is plenty.</span>
-  <textarea id="demo-a" rows="3" placeholder="type here" spellcheck="false"></textarea>
-</div>
-<div class="consent-row">
-  <input type="checkbox" id="demo-c">
-  <label for="demo-c">This may be used for the consultation. Please do not include personal details.</label>
-</div>
-<p><button type="button" class="primary">Submit</button> <button type="button" class="ghost">Back</button></p>
-
+<section class="entry" id="chat">
 <h3>Conversation</h3>
+<p class="sub">Bubbles and an input. The flattened corner does the work an avatar would, for nothing.</p>
 <div class="chat-log" style="max-height:none">
   <div class="bubble bot">What is one change you would suggest?</div>
   <div class="bubble me">Hold exams twice a year, so one bad day is not the whole result.</div>
@@ -198,38 +378,24 @@ that ran these on real phones. All of it sits on the spacing and type tokens
   <textarea rows="1" placeholder="your reply" aria-label="reply" spellcheck="false"></textarea>
   <button type="button" class="primary">Send</button>
 </div>
+</section>
 
+<section class="entry" id="trace">
 <h3>Pipeline trace</h3>
-<p class="sub">Shows the work crossing a boundary, so a reader need not take the integration on trust.</p>
+<p class="sub">Work crossing a boundary — a submission going out, a verdict coming back — so a reader need not take an integration on trust.</p>
 <div class="trace">
   <div class="trace-step"><span class="trace-dot done"></span><div class="trace-body"><strong>Accepted</strong> <span class="sub">— 41ms</span></div></div>
-  <div class="trace-step"><span class="trace-dot done"></span><div class="trace-body"><strong>Moderated</strong> <span class="sub">— compliant, 1.2s</span>
+  <div class="trace-step"><span class="trace-dot done"></span><div class="trace-body"><strong>Moderated</strong> <span class="sub">— compliant</span>
     <pre class="payload">{ "status": "Compliant", "locator": "OLB-4QHY-MM8D" }</pre></div></div>
   <div class="trace-step"><span class="trace-dot bad"></span><div class="trace-body"><strong>Webhook</strong> <span class="sub">— refused, will retry</span></div></div>
 </div>
+</section>
 
-<h3>Footer</h3>
-<div class="site-footer" style="margin-top:1rem">
-  <nav class="footer-grid">
-    <a href="#app">Architecture</a><a href="#app">About</a>
-    <a href="#app">Privacy Policy</a><a href="#app">Terms &amp; Conditions</a>
-  </nav>
-</div>
+<p class="side-label">Data</p>
 
-<h3>Icons</h3>
-<p class="sub">Sixteen by default, in <code>currentColor</code>. Build a smaller set with
-<code>node scripts/build-icons.mjs mic chat mail</code> — the full Lucide sprite stays in
-<code>vendor/</code> and never reaches a browser.</p>
-<p style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;font-size:1.4rem">
-  <i class="icon i-mic"></i><i class="icon i-keyboard"></i><i class="icon i-chat"></i>
-  <i class="icon i-phone"></i><i class="icon i-mail"></i><i class="icon i-post"></i>
-  <i class="icon i-globe"></i><i class="icon i-whatsapp"></i><i class="icon i-telegram"></i>
-  <i class="icon i-menu"></i><i class="icon i-close"></i><i class="icon i-check"></i>
-  <i class="icon i-chevron-down"></i><i class="icon i-search"></i><i class="icon i-external"></i>
-  <i class="icon i-alert"></i>
-</p>
-
-<h2 id="datatable">Data table</h2>
+<section class="entry" id="table">
+<h3>Data table</h3>
+<p class="sub">Sort, filter and page, on a headless engine with a flywheel skin.</p>
 <p class="sub">headless <a href="https://tanstack.com/table/latest/docs/api/core/table">@tanstack/table-core</a>
 engine, flywheel skin — click a header to sort, type to filter, page through. Declarative via
 <code>data-fw-table</code>, or <code>fwDataTable(el, {columns, data})</code>.</p>
@@ -270,6 +436,29 @@ engine, flywheel skin — click a header to sort, type to filter, page through. 
 
 <hr>
 <p class="sub"><a href="https://github.com/theflywheel/flywheel-theme">theflywheel/flywheel-theme</a></p>
+</section>
+
+<section class="entry" id="code">
+<h3>Code &amp; JSON</h3>
+<p class="sub">Syntax highlighting, JSON token colours, and terminal blocks that tell command from output.</p>
+<pre data-lang="sh"><code class="language-sh">$ npm i flywheel-theme
+added 1 package in 1s</code></pre>
+<pre class="json">{ "status": "Compliant", "tokens": 1306, "flagged": false, "rule": null }</pre>
+</section>
+
+<section class="entry" id="diagram">
+<h3>Diagrams</h3>
+<p class="sub">Mermaid, themed to match.</p>
+<pre class="mermaid">
+flowchart LR
+  A[Response] --> B{Moderate}
+  B -->|compliant| C[Store]
+  B -->|flagged| D[Human review]
+</pre>
+</section>
+
+</main>
+</div>
 
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
