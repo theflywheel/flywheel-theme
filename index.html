@@ -19,7 +19,8 @@
 </head>
 <body class="wide">
 
-<nav><a href="#article">Article</a> <a href="#markdown">Markdown</a> <a href="#components">Components</a> <a href="#controls">Controls</a>
+<nav><a href="#article">Article</a> <a href="#markdown">Markdown</a> <a href="#components">Components</a> <a href="#app">App</a>
+<a href="#controls">Controls</a>
 <a href="https://github.com/theflywheel/flywheel-theme">GitHub</a></nav>
 
 <main>
@@ -157,6 +158,61 @@ sequenceDiagram
 <div class="searchbar" style="margin-top:.8em">
   <textarea class="autogrow" rows="1" placeholder="or describe your situation in a few lines" aria-label="describe your situation" spellcheck="false" oninput="autogrow(this)"></textarea>
   <button type="button">AI search</button>
+</div>
+
+<h2 id="app">App vocabulary</h2>
+<p class="sub">Forms, choices, conversation and shell. Brought back from a public consultation
+that ran these on real phones. All of it sits on the spacing and type tokens
+(<code>--sp-*</code>, <code>--fs-*</code>), so a re-tune moves everything together.</p>
+
+<h3>Choices</h3>
+<p class="sub">Large tap targets as primary navigation. An odd last card spans the row.</p>
+<div class="option-grid">
+  <a class="opt-card" href="#app">Speak</a>
+  <a class="opt-card" href="#app">Chat</a>
+  <a class="opt-card" href="#app">WhatsApp</a>
+  <span class="opt-card is-soon" aria-disabled="true"><span>Email<small class="soon-note">coming soon</small></span></span>
+  <a class="opt-card" href="#app">Post</a>
+</div>
+
+<h3>Form</h3>
+<div class="field">
+  <label class="q-label" for="demo-a">What would you change?</label>
+  <span class="field-label">One suggestion is plenty.</span>
+  <textarea id="demo-a" rows="3" placeholder="type here" spellcheck="false"></textarea>
+</div>
+<div class="consent-row">
+  <input type="checkbox" id="demo-c">
+  <label for="demo-c">This may be used for the consultation. Please do not include personal details.</label>
+</div>
+<p><button type="button" class="primary">Submit</button> <button type="button" class="ghost">Back</button></p>
+
+<h3>Conversation</h3>
+<div class="chat-log" style="max-height:none">
+  <div class="bubble bot">What is one change you would suggest?</div>
+  <div class="bubble me">Hold exams twice a year, so one bad day is not the whole result.</div>
+  <div class="bubble bot typing">typing…</div>
+</div>
+<div class="chat-input">
+  <textarea rows="1" placeholder="your reply" aria-label="reply" spellcheck="false"></textarea>
+  <button type="button" class="primary">Send</button>
+</div>
+
+<h3>Pipeline trace</h3>
+<p class="sub">Shows the work crossing a boundary, so a reader need not take the integration on trust.</p>
+<div class="trace">
+  <div class="trace-step"><span class="trace-dot done"></span><div class="trace-body"><strong>Accepted</strong> <span class="sub">— 41ms</span></div></div>
+  <div class="trace-step"><span class="trace-dot done"></span><div class="trace-body"><strong>Moderated</strong> <span class="sub">— compliant, 1.2s</span>
+    <pre class="payload">{ "status": "Compliant", "locator": "OLB-4QHY-MM8D" }</pre></div></div>
+  <div class="trace-step"><span class="trace-dot bad"></span><div class="trace-body"><strong>Webhook</strong> <span class="sub">— refused, will retry</span></div></div>
+</div>
+
+<h3>Footer</h3>
+<div class="site-footer" style="margin-top:1rem">
+  <nav class="footer-grid">
+    <a href="#app">Architecture</a><a href="#app">About</a>
+    <a href="#app">Privacy Policy</a><a href="#app">Terms &amp; Conditions</a>
+  </nav>
 </div>
 
 <h2 id="datatable">Data table</h2>
