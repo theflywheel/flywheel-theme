@@ -62,6 +62,33 @@
   --fs-card: 1.15rem;                           /* actions                  */
   --fs-question: clamp(1.15rem, 4vw, 1.4rem);   /* the ask                  */
   --fs-title: clamp(1.5rem, 5vw, 1.9rem);       /* identity                 */
+
+  /* Control sizing. These default to the compact end, because a mouse is
+   * precise and this is a dense page; the coarse-pointer block below scales
+   * them up for fingers. Sizing through tokens rather than per-component
+   * means a control added later is the right size for free. */
+  --ctl-min-h: 36px;
+  --ctl-pad-y: 0.45rem;
+  --ctl-pad-x: 0.9rem;
+  --ctl-fs: var(--fs-label);
+  --ctl-radius: 8px;
+  --card-min-h: 44px;
+  --card-fs: var(--fs-label);
+}
+
+/* A fingertip is about 10mm, so 44px is the floor and 52px is comfortable.
+ * Keyed on the pointer rather than the viewport: a tablet needs the large
+ * targets at 1024px wide, and a desktop window dragged narrow does not. */
+@media (pointer: coarse) {
+  :root {
+    --ctl-min-h: 52px;
+    --ctl-pad-y: 0.85rem;
+    --ctl-pad-x: 1.5rem;
+    --ctl-fs: var(--fs-card);
+    --ctl-radius: 10px;
+    --card-min-h: 64px;
+    --card-fs: var(--fs-card);
+  }
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -362,13 +389,13 @@ pre.mermaid svg text, pre.mermaid svg tspan, .mermaid svg text, .mermaid svg tsp
 /* the affirmative action: one per screen, ideally */
 button.primary {
   font: inherit;
-  font-size: var(--fs-card);
+  font-size: var(--ctl-fs);
   background: var(--fw-accent);
   color: var(--fw-on-accent);
   border: 1px solid var(--fw-accent);
-  border-radius: 10px;
-  padding: 0.85rem 1.5rem;
-  min-height: 52px;          /* thumbs, not cursors */
+  border-radius: var(--ctl-radius);
+  padding: var(--ctl-pad-y) var(--ctl-pad-x);
+  min-height: var(--ctl-min-h);
   cursor: pointer;
 }
 button.primary:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -378,23 +405,25 @@ button.primary.block { display: block; width: 100%; }
 /* everything else: same shape, no claim on attention */
 button.ghost {
   font: inherit;
+  font-size: var(--ctl-fs);
   background: transparent;
   color: var(--fw-ink);
   border: 1px solid var(--fw-line);
-  border-radius: 10px;
-  padding: 0.85rem 1.5rem;
+  border-radius: var(--ctl-radius);
+  padding: var(--ctl-pad-y) var(--ctl-pad-x);
+  min-height: var(--ctl-min-h);
   cursor: pointer;
 }
 
 textarea, input[type="text"] {
   width: 100%;
   font: inherit;
-  font-size: var(--fs-card);
+  font-size: var(--ctl-fs);
   color: var(--fw-ink);
   background: var(--fw-panel);
   border: 1px solid var(--fw-line);
-  border-radius: 10px;
-  padding: 0.5rem 0.6rem;
+  border-radius: var(--ctl-radius);
+  padding: var(--sp-2) var(--sp-3);
 }
 textarea:focus, input[type="text"]:focus { outline: 2px solid var(--fw-accent); outline-offset: -1px; }
 
@@ -415,14 +444,14 @@ textarea:focus, input[type="text"]:focus { outline: 2px solid var(--fw-accent); 
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--sp-3);
-  grid-auto-rows: minmax(64px, 80px);
+  grid-auto-rows: minmax(var(--card-min-h), auto);
 }
 .opt-card {
   display: flex; flex-direction: row; align-items: center; justify-content: center;
   gap: var(--sp-2);
-  padding: var(--sp-3); border-radius: 12px; min-height: 64px; height: 100%;
+  padding: var(--sp-3); border-radius: 12px; min-height: var(--card-min-h); height: 100%;
   border: 1.5px solid var(--fw-line); background: var(--fw-panel); color: var(--fw-ink);
-  text-decoration: none; font: inherit; font-size: var(--fs-card); font-weight: 600;
+  text-decoration: none; font: inherit; font-size: var(--card-fs); font-weight: 600;
   cursor: pointer;
 }
 .opt-card:hover, .opt-card:focus-visible { border-color: var(--fw-accent); background: var(--fw-accent-soft); }
@@ -546,8 +575,9 @@ body.fold > main { flex: 1; display: flex; flex-direction: column; justify-conte
     --fs-title: 1.35rem;
     --fs-question: 1.08rem;
   }
-  .option-grid { gap: var(--sp-2); grid-auto-rows: minmax(48px, 60px); }
-  .opt-card { min-height: 46px; font-size: 1rem; padding: var(--sp-2) var(--sp-3); }
+  :root { --card-min-h: 46px; --card-fs: 1rem; }
+  .option-grid { gap: var(--sp-2); }
+  .opt-card { padding: var(--sp-2) var(--sp-3); }
   .opt-card svg { width: 20px; height: 20px; }
   .site-footer { margin-top: var(--sp-3); padding-top: var(--sp-2); }
   .footer-grid a { padding: 0; }
@@ -556,13 +586,12 @@ body.fold > main { flex: 1; display: flex; flex-direction: column; justify-conte
 /* Very short screens — an original iPhone SE, or any handset in landscape.
  * A last squeeze of the whitespace rather than the content. */
 @media (max-height: 600px) {
-  .option-grid { grid-auto-rows: minmax(44px, 52px); }
+  :root { --card-min-h: 44px; }
 }
 
-/* Touch targets. The pointer:coarse rule above raises padding on inherited
- * controls; these are the app controls, and 44px is the floor worth meeting. */
+/* What the size tokens cannot express: fixed-square controls, and link rows
+ * that need room around them rather than a taller box. */
 @media (pointer: coarse) {
-  .opt-card { min-height: 64px; }
   .site-menu-btn { width: 44px; height: 44px; }
   .footer-grid a { padding: var(--sp-2) 0; }
 }

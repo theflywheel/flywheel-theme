@@ -141,9 +141,9 @@ All of it sits on two token scales, so a re-tune moves everything together:
 | `--fs-question`, `--fs-title` | type, fluid via `clamp()` |
 | `--fw-on-accent` | text sitting on a filled accent, flips with the theme |
 
-**Controls.** `button.primary` (with `.big`, `.block`) and `button.ghost`, both
-52px minimum so a thumb can hit them. `textarea` and `input[type=text]` gain a
-border, radius and accent focus ring. Wrap fields in `.field`, label with
+**Controls.** `button.primary` (with `.big`, `.block`) and `button.ghost`.
+`textarea` and `input[type=text]` gain a border, radius and accent focus ring.
+Wrap fields in `.field`, label with
 `.q-label` and `.field-label`, and use `.consent-row` where someone is agreeing
 to something — its checkbox is deliberately larger than the default, because a
 mis-tap there is a consent problem rather than a layout one.
@@ -164,6 +164,26 @@ coming back — so a reader need not take an integration on trust.
 **Shell.** `.site-menu-btn` and `.site-menu-panel` (a fixed overlay mirroring
 the theme toggle, deliberately not a header bar), and `.site-footer` with
 `.footer-grid`.
+
+### Density follows the pointer
+
+Controls are sized through tokens, and the tokens change with the input device:
+
+| | mouse | touch |
+|---|---|---|
+| `--ctl-min-h` | 36px | 52px |
+| `--ctl-fs` | `--fs-label` | `--fs-card` |
+| `--card-min-h` | 44px | 64px |
+
+A fingertip is about 10mm, so 44px is the floor and 52px is comfortable. A
+mouse is precise, and this is a dense monospace page, so the same control at
+that size looks oversized.
+
+The switch is `@media (pointer: coarse)`, not a viewport width — a tablet needs
+the large targets at 1024px wide, and a desktop window dragged narrow does not.
+Because the sizes are tokens, a control you add later is the right size for
+free, and the short-screen tiers below adjust the same tokens rather than
+fighting them.
 
 ### Fitting a small screen
 
